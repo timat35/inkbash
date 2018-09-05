@@ -1,0 +1,112 @@
+import sys
+from lxml import etree
+import math
+import subprocess
+
+
+for i in range(0,3):
+    subprocess.call(['inkscape','--without-gui', '--export-plain-svg=./temp/bar'+str(i)+'.svg', './temp/bar'+str(i)+'.eps'], shell=True)
+    print('bar'+str(i) + " convert")
+    subprocess.call(['inkscape','--without-gui', '--export-plain-svg=./temp/pie'+str(i)+'.svg', './temp/pie'+str(i)+'.eps'], shell=True)
+    print('pie'+str(i) + " convert")
+
+
+
+graph_title = "Low HDI, both sexes"
+pop_size= [8054578, 3829043, 3204212, 1654999, 22935763, 11055334]
+
+lab_inc = ["Breast", "Colorectum", "Lung", "Prostate", "Bladder"]
+lab_mort = ["Lung", "Colorectum", "Pancreas", "Breast", "Stomach"]
+lab_prev = ["Breast", "Prostate", "Colorectum", "Bladder", "Lung"]
+
+pie_size= [0,0,0]
+pie_file = ["./temp/pie0.svg", "./temp/pie1.svg", "./temp/pie2.svg"]
+bar_file = ["./temp/bar0.svg", "./temp/bar1.svg", "./temp/bar2.svg"]
+bar_scale = ["-2.5593047", "356.80114", "698.53954"]
+
+pie_size[0] = math.sqrt( pop_size[0]/pop_size[4]) * 200
+pie_size[1] = math.sqrt( pop_size[2]/pop_size[4]) * 200
+pie_size[2] = 200
+
+
+percent_size= [0,0,0,0,0,0]
+percent_size[0] = round((pop_size[1]/pop_size[0])*100, 1)
+percent_size[1] = round(((pop_size[0]- pop_size[1])/pop_size[0])*100, 1)
+percent_size[2] = round((pop_size[3]/pop_size[2])*100, 1)
+percent_size[3] = round(((pop_size[2]- pop_size[3])/pop_size[2])*100, 1)
+percent_size[4] = round((pop_size[5]/pop_size[4])*100, 1)
+percent_size[5] = round(((pop_size[4]- pop_size[5])/pop_size[4])*100, 1)
+
+base = etree.parse(open('./pie_bar_base.svg'))
+root = base.getroot()
+
+for i in range(0,3):
+
+
+    base_pie = etree.parse(open(pie_file[i]))
+    root_pie = base_pie.getroot()
+    pie = root_pie[2]
+
+
+    pie[0].remove(pie[0][5])
+    pie[0].remove(pie[0][0])
+
+    temp = pie[0]
+
+    scale = (pie_size[i]/268.533)*0.1
+
+    temp.set("transform", "matrix(" + str(scale) + ",0,0,"+ str(scale*-1) + "," + str(i*400) + ",0)")
+
+    root.append(temp)
+
+    base_bar = etree.parse(open(bar_file[i]))
+    root_bar = base_bar.getroot()
+
+
+    bar = root_bar[2]
+
+
+    bar[0].remove(bar[0][0])
+
+    temp = bar[0]
+
+
+    temp.set("style", "stroke-width:3.12442231")
+    temp.set("transform", "matrix(0.0226505,0,0,-0.04522544," + bar_scale[i]+",433.45037)")
+    root.append(temp)
+
+
+
+
+
+
+for child in root[3]:
+    if len(child.getchildren()) == 1:
+        for i in range(0,6):
+            if child[0].text == str(i+1)+"%":
+                child[0].text = str(percent_size[i])+"%"
+            if child[0].text == str(i+1):
+                child[0].text = lab_inc[i]
+            if child[0].text == str(i+1+5):
+                child[0].text = lab_mort[i]
+            if child[0].text == str(i+1+10):
+                child[0].text = lab_prev[i]
+
+        if child[0].text == "Title":
+            child[0].text = graph_title
+    if len(child.getchildren()) == 2:
+        for i in range(0,3):
+            if child[0].text == str((i+1)*1000):
+                child[0].text = str(int(round(pop_size[i*2]/1000,0))*1000)
+    if len(child.getchildren()) == 10:
+        print(child)
+
+
+
+
+base.write('./test.svg', pretty_print=False)
+
+
+
+
+
