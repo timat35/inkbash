@@ -4,7 +4,7 @@ import math
 import subprocess
 import csv
 
-graph_title = "World, females"
+graph_title = "World, males"
 
 
 for i in range(0,3):
