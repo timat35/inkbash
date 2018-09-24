@@ -2,7 +2,7 @@
 import os
 import subprocess
 
-dir_base = 'done'
+dir_base = './pie/done'
 
 for file_base in os.listdir(dir_base):
     if file_base[-3:] == 'svg':
