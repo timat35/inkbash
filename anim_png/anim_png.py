@@ -6,7 +6,7 @@ import math
 
 
 
-dpi = 300
+dpi = 200
 
 
 base = etree.parse('./base_svg.svg')
