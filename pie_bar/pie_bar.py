@@ -3,11 +3,15 @@ from lxml import etree
 import math
 import subprocess
 import csv
+import re
 
-graph_title = "World, test"
+graph_title = "Europe, both sexes"
+file_tile = re.sub(r"\W+", r"_", graph_title)
 
 
 for i in range(0,3):
+    subprocess.call(['inkscape','--without-gui', '--export-plain-svg=./temp/bar'+str(i)+'.svg', './temp/bar'+str(i)+'.eps'], shell=True)
+    print('bar'+str(i) + " convert")
     subprocess.call(['inkscape','--without-gui', '--export-plain-svg=./temp/pie'+str(i)+'.svg', './temp/pie'+str(i)+'.eps'], shell=True)
     print('pie'+str(i) + " convert")
 
@@ -139,8 +143,7 @@ for child in root[3]:
 
 
 
-
-base.write('./test.svg', pretty_print=False)
+base.write('./done/multi_top5_' + file_tile + '.svg', pretty_print=False)
 
 
 
