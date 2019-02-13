@@ -2,6 +2,7 @@
 import os
 import subprocess
 
+#dir_base = 'C:/Projects/oropharynx/_figs/update'
 dir_base = './svg2pdf'
 
 for file_base in os.listdir(dir_base):

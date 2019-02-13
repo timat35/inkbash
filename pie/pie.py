@@ -5,12 +5,12 @@ import math
 import subprocess
 import csv
 
-graph_title = 'Europe'
+graph_title = 'World_M'
 file_eps = './temp/temp.eps'
 file_svg = file_eps.replace('.eps','.svg')
 
 
-#subprocess.call(['inkscape','--without-gui', '--export-plain-svg='+file_svg, file_eps], shell=True)
+subprocess.call(['inkscape','--without-gui', '--export-plain-svg='+file_svg, file_eps], shell=True)
 
 
 

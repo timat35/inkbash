@@ -26,6 +26,7 @@ panel_root = panel_base.getroot()
 for file_base in os.listdir(dir_file):
 
     print(file_base)
+
     pattern = "^.+_(\d+)_.+$"
     regex = re.search(pattern, file_base)
     area_code = regex.group(1)
@@ -42,15 +43,17 @@ for file_base in os.listdir(dir_file):
     for child in map:
         if len(child) > 0:
             for text in child:
-                if not(re.search("[^a-zA-Z*]", text[0].text)):
+                if not(re.search("[^a-zA-Z* ]", text[0].text)):
                     country_label = text[0].text[:]
 
 
-    country_label = country_label.replace("*", "")
-    print(country_label)
 
-    base.write('./done/prediction_testis_'+country_label+'.svg', pretty_print=False)
-    subprocess.call(['inkscape','--without-gui', '-d' + str(dpi) ,'--export-background=#ffffff','--export-png=./done/prediction_testis_'+country_label+'.png', './done/prediction_testis_'+country_label+'.svg'], shell=True)
+    country_file = country_label.replace("*", "")
+    country_file = country_file.replace(" ", "_")
+    print(country_file)
+
+    base.write('./done/prediction_testis_'+country_file+'.svg', pretty_print=False)
+    subprocess.call(['inkscape','--without-gui', '-d' + str(dpi) ,'--export-background=#ffffff','--export-png=./done/prediction_testis_'+country_file+'.png', './done/prediction_testis_'+country_file+'.svg'], shell=True)
 
     temp = root[:][2]
 
@@ -65,7 +68,7 @@ for file_base in os.listdir(dir_file):
 
     x[ind] = x[ind]+1
 
-    if x[ind] == 7:
+    if x[ind] == 6:
         x[ind] = 0
         for i in range(ind,len(area)):
             y[i] = y[i]+1
@@ -75,10 +78,10 @@ for file_base in os.listdir(dir_file):
 
 
 
-panel_base.write('./test.svg', pretty_print=False)
+panel_base.write('./trend_prediction_testis_country.svg', pretty_print=False)
 
 
-print(i)
+
 
 
 

@@ -6,13 +6,11 @@ import math
 
 
 
-dpi = 200
+dpi = 150
 
 
 base = etree.parse('./base_svg.svg')
 base.write('./temp.svg', pretty_print=False)
-
-
 
 root = base.getroot()
 map = root[(len(root)-1)]

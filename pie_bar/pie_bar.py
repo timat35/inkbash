@@ -4,12 +4,10 @@ import math
 import subprocess
 import csv
 
-graph_title = "World, males"
+graph_title = "World, test"
 
 
 for i in range(0,3):
-    subprocess.call(['inkscape','--without-gui', '--export-plain-svg=./temp/bar'+str(i)+'.svg', './temp/bar'+str(i)+'.eps'], shell=True)
-    print('bar'+str(i) + " convert")
     subprocess.call(['inkscape','--without-gui', '--export-plain-svg=./temp/pie'+str(i)+'.svg', './temp/pie'+str(i)+'.eps'], shell=True)
     print('pie'+str(i) + " convert")
 
