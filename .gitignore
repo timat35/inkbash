@@ -1,7 +1,7 @@
 __pycache__/
-trend_panel/done/
-pie/done/
-pie_bar/done/
-svg2pdf/
-other/done
-/anim_png/anim_png/
+trend_panel/done/*.png
+trend_panel/done/*.svg
+svg2pdf/*.pdf
+other/done/*.svg
+other/done/*.pdf
+/anim_png/anim_png/*.png

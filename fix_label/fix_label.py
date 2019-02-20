@@ -1,5 +1,3 @@
-
-
 import sys
 import copy
 from lxml import etree
@@ -28,6 +26,6 @@ for elem in root.iter():
 
 base.write('./graph.svg', pretty_print=False)
 
-subprocess.call(['inkscape', '-f='+file_final], shell=True)
-
+subprocess.Popen(['inkscape', '-f='+file_final])
+print("look on inkscape")
 

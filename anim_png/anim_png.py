@@ -36,6 +36,8 @@ for i in range(0,(nb_png)):
     map_png.remove(map_png[0])
 
 
+print("annnnnd done!")
+
 
 
 
