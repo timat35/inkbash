@@ -18,8 +18,6 @@ for elem in root.iter():
         temp_x = re.sub(r"(\d.*?)\s.+$", r"\1", elem.get('x'))
         elem.set('x', temp_x)
         elem.set('y', temp_y)
-        if ('oba' in elem.text):
-            print(elem.text)
 
 
 base.write('./graph.svg', pretty_print=False)
