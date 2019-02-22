@@ -1,8 +1,5 @@
-import sys
-import os
 from lxml import etree
 import subprocess
-import math
 
 dpi = 150
 
@@ -30,7 +27,7 @@ for i in range(0, (nb_png)):
 
     map_png.append(map[0])
     output.write('./anim_png.svg', pretty_print=False)
-    subprocess.call(['inkscape', '--without-gui', '-d' + str(dpi),'--export-png=./anim_png/anim_png'+ str(i) + '.png', './anim_png.svg'], shell=True)
+    subprocess.call(['inkscape', '--without-gui', '-d' + str(dpi), '--export-png=./anim_png/anim_png'+ str(i) + '.png', './anim_png.svg'], shell=True)
     map_png.remove(map_png[0])
 
 

@@ -2,6 +2,7 @@ __pycache__/
 trend_panel/done/*.png
 trend_panel/done/*.svg
 svg2pdf/*.pdf
+svg2pdf/*.svg
 other/done/*.svg
 other/done/*.pdf
 /anim_png/anim_png/*.png

@@ -1,31 +1,4 @@
-cancer_label,cases,rk_cases
-"Breast",199734,1
-"Prostate",190385,2
-"Colorectum",128006,3
-"Lung",89772,4
-"Stomach",67058,5
-"Cervix uteri",56187,6
-"Thyroid",54741,7
-"Non-Hodgkin lymphoma",39410,8
-"Liver",38400,9
-"Other",549039,10
-"Lung",81384,1
-"Colorectum",64666,2
-"Prostate",53798,3
-"Breast",52558,4
-"Stomach",51914,5
-"Liver",36436,6
-"Pancreas",33311,7
-"Cervix uteri",28318,8
-"Leukaemia",26222,9
-"Other",244151,10
-"Breast",624902,1
-"Prostate",437476,2
-"Colorectum",315005,3
-"Thyroid",188578,4
-"Cervix uteri",158392,5
-"Non-Hodgkin lymphoma",106196,6
-"Leukaemia",101256,7
-"Corpus uteri",91969,8
-"Stomach",89380,9
-"Other",1223314,10
+__00000Z,__00000Y,rank
+"Gallbladder",12185,1
+"Liver",8079,2
+"Other",349342,3

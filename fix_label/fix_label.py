@@ -6,6 +6,7 @@ file_eps = './temp/temp.eps'
 file_svg = file_eps.replace('.eps', '.svg')
 file_final = './graph.svg'
 
+
 subprocess.call(['inkscape', '--without-gui', '--export-plain-svg='+file_svg, file_eps], shell=True)
 print("file convert to svg")
 

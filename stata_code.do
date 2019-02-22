@@ -1,163 +1,163 @@
 *begin trend panel
 
 
-use  "${dir_dta}\nordpred_testis_output_recent.dta", clear
+	use  "${dir_dta}\nordpred_testis_output_recent.dta", clear
 
-replace py = 0 if age == 18
-replace cases = 0 if age == 18
-replace cases = 0 if cases < 0
-
-
-CSU_ASR age cases py,var_age_gr(country*)  by( country* base    year gof np  ) standardE("st_err")  var_ASR("asr") 
-
-merge m:1 country_code  using   "${dir_dta}\pop_estimate.dta"
-drop _m
+	replace py = 0 if age == 18
+	replace cases = 0 if age == 18
+	replace cases = 0 if cases < 0
 
 
+	CSU_ASR age cases py,var_age_gr(country*)  by( country* base    year gof np  ) standardE("st_err")  var_ASR("asr") 
 
-sort  country_code  year 
-format temp_ratio %4.1f
+	merge m:1 country_code  using   "${dir_dta}\pop_estimate.dta"
+	drop _m
 
-CSU_country_info country_code
-drop continent* country_iso3
 
-sort  area_label country_code  year 
-egen dummy_country = group(country_code)
 
-tempfile temp_graph
-save `temp_graph' ,replace
+	sort  country_code  year 
+	format temp_ratio %4.1f
 
-use `temp_graph' ,clear
-keep country* area* 
-duplicates drop 
-gsort area* country_label 
-bys area_code :gen order = _n
-gen str_order = string(order,"%02.0f") 
-drop order 
-tempfile temp_order
-save `temp_order' ,replace
+	CSU_country_info country_code
+	drop continent* country_iso3
 
-use `temp_graph' ,clear
-merge m:1 area* country* using `temp_order'
-drop _m 
-sort country* year 
-save `temp_graph' ,replace
+	sort  area_label country_code  year 
+	egen dummy_country = group(country_code)
 
-sum asr
-tab year
-
-forvalues i =1/ 26 {
+	tempfile temp_graph
+	save `temp_graph' ,replace
 
 	use `temp_graph' ,clear
-	
-	keep if dummy_country == `i'
-	
-	
-	drop if year < 1975
-	sum year
-	local min_y = r(min)
-	if mod( `min_y', 10) == 0 {
-		local min2_y = `min_y'
-	}
-	else {
-		local min2_y = `min_y'+5
-	}
-	
-	local title_graph = country_label
-	
-	if national == 0 {
-		local title_graph = "`title_graph'*"
-		local subtitle_graph = "*: based on regional registries" 
-	}
-	else {
-		local subtitle_graph = "" 
-	}
+	keep country* area* 
+	duplicates drop 
+	gsort area* country_label 
+	bys area_code :gen order = _n
+	gen str_order = string(order,"%02.0f") 
+	drop order 
+	tempfile temp_order
+	save `temp_order' ,replace
 
-	
-	
-	
-	 # delimit ;
-	twoway 
+	use `temp_graph' ,clear
+	merge m:1 area* country* using `temp_order'
+	drop _m 
+	sort country* year 
+	save `temp_graph' ,replace
+
+	sum asr
+	tab year
+
+	forvalues i =1/ 26 {
+
+		use `temp_graph' ,clear
 		
-		(connected asr year if  base<=2 , lcolor( "25 113 159") lwidth(medthick) msymbol(none)  mlabcolor(black))
-		(connected asr year if  base>=2 , lcolor( "25 113 159") lwidth(medthick) lpattern(dash) msymbol(none)  mlabcolor(black)) // 
+		keep if dummy_country == `i'
+		
+		
+		drop if year < 1975
+		sum year
+		local min_y = r(min)
+		if mod( `min_y', 10) == 0 {
+			local min2_y = `min_y'
+		}
+		else {
+			local min2_y = `min_y'+5
+		}
+		
+		local title_graph = country_label
+		
+		if national == 0 {
+			local title_graph = "`title_graph'*"
+			local subtitle_graph = "*: based on regional registries" 
+		}
+		else {
+			local subtitle_graph = "" 
+		}
 
 		
-			, 
+		
+		
+		 # delimit ;
+		twoway 
 			
-			title( `title_graph', color(black))
-			//caption( `subtitle_graph', size(2))
-			ytitle( "Age standardized incidence rate per 100,000",size(small)) 
-			yscale(  log range(0.9 17) titlegap(5)) // titlegap(1)
-			ylabel( 1 1.2 1.5 2 2.5 3 4 5 6 7 8 9 10 12 13 15 17    , labels labsize(small) angle(horizontal) format(%3s) grid glwidth(vthin) glcolor(gs13)) 
-			ymtick(0.9 (0.1) 2.5 2.5 (0.5) 5 5 (1) 17   , nolabels grid glwidth(vthin) glcolor(gs13)) 
-			xtitle( "Year" ,size(small) ) 
-			xscale( titlegap(3))
-			xlabel( 1980 (10) 2030, labsize(small) valuelabel grid glwidth(vthin) glcolor(gs13) )  // labgap(1)
-			xmtick( 1980 (5) 2035 , nolabels grid glwidth(vthin) glcolor(gs13)) 
-			xline( 1980 ,   lwidth(vthin) lcolor(gs13)) 
-			legend(off)
-			name(graph`i', replace)
-			graphregion(style(none) istyle(none))
-			plotregion(style(none) istyle(none))
-			ysize(10) xsize(7)  
+			(connected asr year if  base<=2 , lcolor( "25 113 159") lwidth(medthick) msymbol(none)  mlabcolor(black))
+			(connected asr year if  base>=2 , lcolor( "25 113 159") lwidth(medthick) lpattern(dash) msymbol(none)  mlabcolor(black)) // 
 
-		;
+			
+				, 
+				
+				title( `title_graph', color(black))
+				//caption( `subtitle_graph', size(2))
+				ytitle( "Age standardized incidence rate per 100,000",size(small)) 
+				yscale(  log range(0.9 17) titlegap(5)) // titlegap(1)
+				ylabel( 1 1.2 1.5 2 2.5 3 4 5 6 7 8 9 10 12 13 15 17    , labels labsize(small) angle(horizontal) format(%3s) grid glwidth(vthin) glcolor(gs13)) 
+				ymtick(0.9 (0.1) 2.5 2.5 (0.5) 5 5 (1) 17   , nolabels grid glwidth(vthin) glcolor(gs13)) 
+				xtitle( "Year" ,size(small) ) 
+				xscale( titlegap(3))
+				xlabel( 1980 (10) 2030, labsize(small) valuelabel grid glwidth(vthin) glcolor(gs13) )  // labgap(1)
+				xmtick( 1980 (5) 2035 , nolabels grid glwidth(vthin) glcolor(gs13)) 
+				xline( 1980 ,   lwidth(vthin) lcolor(gs13)) 
+				legend(off)
+				name(graph`i', replace)
+				graphregion(style(none) istyle(none))
+				plotregion(style(none) istyle(none))
+				ysize(10) xsize(7)  
+
+			;
+			
+		# delimit cr
 		
-	# delimit cr
-	
-	
-	local area_code = area_code
-	local str_order = str_order
-	local title_graph = country_label 		
-	
-	graph export "${dir_inkbash}\trend_panel\temp\graph_`area_code'_`str_order'.eps", as(eps) replace
+		
+		local area_code = area_code
+		local str_order = str_order
+		local title_graph = country_label 		
+		
+		graph export "${dir_inkbash}\trend_panel\temp\graph_`area_code'_`str_order'.eps", as(eps) replace
 
-}
- 
+	}
+	 
 
 *end 
 
 *begin pie
 
 
-use "${dir_GHE_mortality}\GHE_mortality_2016.dta", clear
+	use "${dir_GHE_mortality}\GHE_mortality_2016.dta", clear
 
-keep if country_code == 250
-keep if sex == 0 
-drop if age == 7
+	keep if country_code == 250
+	keep if sex == 0 
+	drop if age == 7
 
-collapse (sum) cases, by(ghe* )
+	collapse (sum) cases, by(ghe* )
 
-replace ghe_level = 2 if ghe_level == 0 
-keep if ghe_level == 2
-gsort -cases
+	replace ghe_level = 2 if ghe_level == 0 
+	keep if ghe_level == 2
+	gsort -cases
 
-gen rk_cases =_n
-drop if rk_cases > 6
+	gen rk_cases =_n
+	drop if rk_cases > 6
 
 
-forvalues i=1(1)5 {
+	forvalues i=1(1)5 {
 
-	replace cases = cases - cases[_n+`i'] if rk == 1 
+		replace cases = cases - cases[_n+`i'] if rk == 1 
 
-}
+	}
 
-replace rk_cases = 7 if rk == 1 
-replace ghe_cause = "Other" if rk == 7 
-sort  rk_cases
+	replace rk_cases = 7 if rk == 1 
+	replace ghe_cause = "Other" if rk == 7 
+	sort  rk_cases
 
-csv_merge ghe_code using "${dir_DATA}\_dict\cancer_color.csv", master_key(10) using_key(10)
-keep if _m == 3
-drop _m v5 colorhex cancer cancer_lab
+	csv_merge ghe_code using "${dir_DATA}\_dict\cancer_color.csv", master_key(10) using_key(10)
+	keep if _m == 3
+	drop _m v5 colorhex cancer cancer_lab
 
-sort rk_cases
-local color1= color[1]
-local color2= color[2]
-local color3= color[3]
-local color4= color[4]
-local color5= color[5]
-local color6= color[6]
+	sort rk_cases
+	local color1= color[1]
+	local color2= color[2]
+	local color3= color[3]
+	local color4= color[4]
+	local color5= color[5]
+	local color6= color[6]
 
 
 
