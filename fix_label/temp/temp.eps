@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0 EPSF-2.0
 %% This is a Stata generated postscript file
-%%BoundingBox: 0 0 720 504
-%%HiResBoundingBox: 0.000 0.000 720.000 504.000
+%%BoundingBox: 0 0 720 720
+%%HiResBoundingBox: 0.000 0.000 720.000 720.000
 %%DocumentNeededResources: font Helvetica
 /xratio 0.022500 def
 /yratio 0.022500 def
@@ -20,14 +20,7 @@
 	xratio mul
 	/xp exch def
 	Slrgb setrgbcolor
-	newpath
-	xp yp moveto
-	xp 0 add yp
-	lineto
-	currentlinecap
-	1 setlinecap
-	stroke
-	setlinecap
+	xp yp .5 0 360 arc fill
 } def
 /Sln {
 	yratio mul
@@ -115,16 +108,15 @@
 	/y0 exch def
 	xratio mul
 	/x0 exch def
+	newpath x0 y0 moveto x0 y1 lineto x1 y1 lineto x1 y0 lineto x0 y0 lineto closepath
 	sfill 1 eq {
 		Ssrgb setrgbcolor
-		x0 y0 moveto
-		x0 y1 lineto x1 y1 lineto x1 y0 lineto x0 y0 lineto
+		gsave
 		fill
+		grestore
 	} if
 	Slw setlinewidth
 	Slrgb setrgbcolor
-	x0 y0 moveto
-	x0 y1 lineto x1 y1 lineto x1 y0 lineto x0 y0 lineto
 	stroke
 } def
 /Sellipse {
@@ -137,22 +129,19 @@
 	/y exch def
 	xratio mul
 	/x exch def
+	/savematrix matrix currentmatrix def
+	x y translate
+	xrad yrad scale
+	0 0 1 0 360 arc
+	savematrix setmatrix
 	sfill 1 eq {
 		Ssrgb setrgbcolor
-		/savematrix matrix currentmatrix def
-		x y translate
-		xrad yrad scale
-		0 0 1 0 360 arc
-		savematrix setmatrix
+		gsave
 		fill
+		grestore
 	} if
 	Slw setlinewidth
 	Slrgb setrgbcolor
-		/savematrix matrix currentmatrix def
-		x y translate
-		xrad yrad scale
-		0 0 1 0 360 arc
-		savematrix setmatrix
 	stroke
 } def
 /Stri {
@@ -174,13 +163,16 @@
 	/xleft exch def
 	xcen add
 	/xright exch def
+	newpath xcen ytop moveto xright ybot lineto xleft ybot lineto xcen ytop lineto closepath
 	sfill 1 eq {
 		Ssrgb setrgbcolor
-		xcen ytop moveto xright ybot lineto xleft ybot lineto xcen ytop lineto fill
+		gsave
+		fill
+		grestore
 	} if
 	Slw setlinewidth
 	Slrgb setrgbcolor
-	xcen ytop moveto xright ybot lineto xleft ybot lineto xcen ytop lineto stroke
+	stroke
 } def
 /Soldtri {
 	/sfill exch def
@@ -201,13 +193,16 @@
 	/x3 x0 def
 	y0 r add
 	/y3 exch def
+	newpath x1 y1 moveto x2 y2 lineto x3 y3 lineto x1 y1 lineto closepath
 	sfill 1 eq {
 		Ssrgb setrgbcolor
-		x1 y1 moveto x2 y2 lineto x3 y3 lineto x1 y1 lineto fill
+		gsave
+		fill
+		grestore
 	} if
 	Slw setlinewidth
 	Slrgb setrgbcolor
-	x1 y1 moveto x2 y2 lineto x3 y3 lineto x1 y1 lineto stroke
+	stroke
 } def
 /Sdia {
 	/sfill exch def
@@ -229,13 +224,16 @@
 	/x3 x def
 	y r add
 	/y3 exch def
-	sfill 1 eq  {
+	newpath x0 y0 moveto x1 y1 lineto x2 y2 lineto x3 y3 lineto x0 y0 lineto closepath
+	sfill 1 eq {
 		Ssrgb setrgbcolor
-		x0 y0 moveto x1 y1 lineto x2 y2 lineto x3 y3 lineto x0 y0 lineto fill
+		gsave
+		fill
+		grestore
 	} if
 	Slw setlinewidth
 	Slrgb setrgbcolor
-	x0 y0 moveto x1 y1 lineto x2 y2 lineto x3 y3 lineto x0 y0 lineto stroke
+	stroke
 } def
 /Scc {
 	/sfill exch def
@@ -245,13 +243,16 @@
 	/y0 exch def
 	xratio mul
 	/x0 exch def
+	x0 y0 r0 0 360 arc closepath
 	sfill 1 eq {
 		Ssrgb setrgbcolor
-		x0 y0 r0 0 360 arc fill
+		gsave
+		fill
+		grestore
 	} if
 	Slw setlinewidth
 	Slrgb setrgbcolor
-	x0 y0 r0 0 360 arc stroke
+	stroke
 } def
 /Spie {
 	/sfill exch def
@@ -263,14 +264,15 @@
 	/y exch def
 	xratio mul
 	/x exch def
+	newpath x y moveto x y r a0 a1 arc closepath
 	sfill 1 eq {
 		Ssrgb setrgbcolor
-		newpath x y moveto x y r a0 a1 arc closepath
+		gsave
 		fill
+		grestore
 	} if
 	Slw setlinewidth
 	Slrgb setrgbcolor
-	newpath x y moveto x y r a0 a1 arc closepath
 	stroke
 } def
 /Splu {
@@ -384,1403 +386,897 @@
 /Helvetica /Helvetica-0 MF-Helvetica
 /Slw 0.120 def
 0.918 0.949 0.953 setrgbcolor
-0 0 720.000 504.000 Sbgfill
+0 0 720.000 720.000 Sbgfill
 /Slrgb {1.000 1.000 1.000} def
 /Strgb {1.000 1.000 1.000} def
 /Ssrgb {1.000 1.000 1.000} def
-/Slw 1.008 def
+/Slw 1.440 def
 /Slrgb {0.000 0.000 0.000} def
 /Strgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-6067 3148 6067 21616 Sln
+7247 4497 7247 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-6905 3148 6905 21616 Sln
+8728 4497 8728 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-7743 3148 7743 21616 Sln
+10209 4497 10209 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-8581 3148 8581 21616 Sln
+11690 4497 11690 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-9419 3148 9419 21616 Sln
+13171 4497 13171 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-10257 3148 10257 21616 Sln
+14652 4497 14652 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-11095 3148 11095 21616 Sln
+16133 4497 16133 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-11933 3148 11933 21616 Sln
+17615 4497 17615 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-12771 3148 12771 21616 Sln
+19096 4497 19096 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-13609 3148 13609 21616 Sln
+20577 4497 20577 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-14447 3148 14447 21616 Sln
+22058 4497 22058 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-15285 3148 15285 21616 Sln
+23539 4497 23539 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-16123 3148 16123 21616 Sln
+25020 4497 25020 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-16961 3148 16961 21616 Sln
+26501 4497 26501 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-17799 3148 17799 21616 Sln
+27983 4497 27983 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-18637 3148 18637 21616 Sln
+29464 4497 29464 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-19475 3148 19475 21616 Sln
+7247 4497 7247 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-20313 3148 20313 21616 Sln
+10209 4497 10209 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-21151 3148 21151 21616 Sln
+13171 4497 13171 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-21989 3148 21989 21616 Sln
+16133 4497 16133 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-22827 3148 22827 21616 Sln
+19096 4497 19096 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-23665 3148 23665 21616 Sln
+22058 4497 22058 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-24503 3148 24503 21616 Sln
+25020 4497 25020 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
 /Slrgb {0.753 0.753 0.753} def
-25341 3148 25341 21616 Sln
+27983 4497 27983 30880 Sln
 /Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-26179 3148 26179 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-27017 3148 27017 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-27855 3148 27855 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-28693 3148 28693 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-29531 3148 29531 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-30369 3148 30369 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-6067 3148 6067 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-7743 3148 7743 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-9419 3148 9419 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-11095 3148 11095 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-12771 3148 12771 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-14447 3148 14447 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-16123 3148 16123 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-17799 3148 17799 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-19475 3148 19475 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-21151 3148 21151 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-22827 3148 22827 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-24503 3148 24503 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-26179 3148 26179 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-27855 3148 27855 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-/Slrgb {0.753 0.753 0.753} def
-29531 3148 29531 21616 Sln
-/Slrgb {0.000 0.000 0.000} def
-17799 3148 17799 21616 Sln
-/Slrgb {0.753 0.753 0.753} def
-5229 3148 5229 21616 Sln
-30369 3148 30369 21616 Sln
 /Ssrgb {0.173 0.482 0.714} def
 /Slw 0.120 def
 /Slrgb {0.173 0.482 0.714} def
-16745 3978 17799 4209 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 3978 17800 4209 1 Srect
+7247 5671 8643 5938 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 5938 7525 6205 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17798 4255 17799 4485 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 4255 17800 4485 1 Srect
+7247 6258 8383 6525 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 6525 7565 6793 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17798 4531 17799 4761 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 4531 17800 4761 1 Srect
+7247 6846 9495 7113 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 7113 7646 7380 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17254 4807 17799 5037 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 4807 17800 5037 1 Srect
+7247 7434 8928 7701 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 7701 7673 7968 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17617 5083 17799 5314 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 5083 17812 5314 1 Srect
+7247 8021 8271 8288 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 8288 7676 8555 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17620 5360 17799 5590 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 5360 17915 5590 1 Srect
+7247 8609 8928 8876 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 8876 7679 9143 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17798 5636 17799 5866 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 5636 17988 5866 1 Srect
+7247 9196 9343 9463 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 9463 7691 9730 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-16684 5912 17799 6143 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 5912 17995 6143 1 Srect
+7247 9784 10414 10051 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 10051 7737 10318 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17798 6189 17799 6419 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 6189 18026 6419 1 Srect
+7247 10371 8779 10638 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 10638 7747 10905 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17639 6465 17799 6695 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 6465 18052 6695 1 Srect
+7247 10959 8864 11226 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 11226 7750 11493 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17481 6741 17799 6971 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 6741 18087 6971 1 Srect
+7247 11546 9736 11813 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 11813 7750 12080 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17641 7017 17799 7248 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 7017 18194 7248 1 Srect
+7247 12134 9544 12401 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 12401 7825 12668 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17401 7294 17799 7524 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 7294 18206 7524 1 Srect
+7247 12721 10486 12988 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 12988 7826 13255 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17331 7570 17799 7800 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 7570 18241 7800 1 Srect
+7247 13309 8904 13576 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 13576 7835 13843 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17671 7846 17799 8077 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 7846 18264 8077 1 Srect
+7247 13896 9904 14163 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 14163 7844 14431 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17674 8123 17799 8353 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 8123 18317 8353 1 Srect
+7247 14484 9654 14751 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 14751 7866 15018 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-16893 8399 17799 8629 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 8399 18401 8629 1 Srect
+7247 15072 9482 15339 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 15339 7900 15606 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17057 8675 17799 8905 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 8675 18497 8905 1 Srect
+7247 15659 9244 15926 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 15926 7931 16193 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17001 8952 17799 9182 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 8952 18563 9182 1 Srect
+7247 16247 9159 16514 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 16514 7941 16781 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17377 9228 17799 9458 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 9228 18573 9458 1 Srect
+7247 16834 9869 17101 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 17101 8072 17368 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17553 9504 17799 9734 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 9504 18622 9734 1 Srect
+7247 17422 9354 17689 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 17689 8072 17956 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-16938 9780 17799 10011 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 9780 18664 10011 1 Srect
+7247 18009 10499 18276 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 18276 8097 18543 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17286 10057 17799 10287 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 10057 18742 10287 1 Srect
+7247 18597 10210 18864 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 18864 8293 19131 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17136 10333 17799 10563 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 10333 18756 10563 1 Srect
+7247 19184 9584 19451 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 19451 8342 19718 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-16689 10609 17799 10839 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 10609 18797 10839 1 Srect
+7247 19772 11199 20039 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 20039 8380 20306 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17798 10886 17799 11116 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 10886 18816 11116 1 Srect
+7247 20359 10191 20626 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 20626 8425 20893 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-16555 11162 17799 11392 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 11162 18860 11392 1 Srect
+7247 20947 10957 21214 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 21214 8488 21481 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-16837 11438 17799 11668 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 11438 18892 11668 1 Srect
+7247 21534 13912 21802 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 21802 8523 22069 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-16496 11714 17799 11945 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 11714 18904 11945 1 Srect
+7247 22122 14338 22389 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 22389 8633 22656 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-16750 11991 17799 12221 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 11991 18938 12221 1 Srect
+7247 22710 10030 22977 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 22977 8690 23244 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17468 12267 17799 12497 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 12267 19015 12497 1 Srect
+7247 23297 12332 23564 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 23564 8755 23831 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-16759 12543 17799 12774 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 12543 19052 12774 1 Srect
+7247 23885 12175 24152 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 24152 8926 24419 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-16096 12820 17799 13050 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 12820 19079 13050 1 Srect
+7247 24472 12287 24739 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 24739 9089 25006 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-16643 13096 17799 13326 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 13096 19106 13326 1 Srect
+7247 25060 14667 25327 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 25327 9186 25594 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17211 13372 17799 13602 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 13372 19172 13602 1 Srect
+7247 25647 12280 25914 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 25914 9198 26181 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-17173 13648 17799 13879 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 13648 19201 13879 1 Srect
+7247 26235 13271 26502 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 26502 9312 26769 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-15821 13925 17799 14155 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 13925 19211 14155 1 Srect
+7247 26822 12848 27089 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 27089 9367 27356 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-16156 14201 17799 14431 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 14201 19258 14431 1 Srect
+7247 27410 13256 27677 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 27677 9433 27944 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-16407 14477 17799 14708 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 14477 19371 14708 1 Srect
+7247 27997 13572 28264 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 28264 9599 28532 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-16293 14754 17799 14984 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 14754 19390 14984 1 Srect
+7247 28585 13012 28852 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 28852 9870 29119 1 Srect
 /Ssrgb {0.173 0.482 0.714} def
 /Slrgb {0.173 0.482 0.714} def
-16495 15030 17799 15260 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 15030 19411 15260 1 Srect
-/Ssrgb {0.173 0.482 0.714} def
-/Slrgb {0.173 0.482 0.714} def
-16381 15306 17799 15536 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 15306 19431 15536 1 Srect
-/Ssrgb {0.173 0.482 0.714} def
-/Slrgb {0.173 0.482 0.714} def
-16502 15582 17799 15813 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 15582 19494 15813 1 Srect
-/Ssrgb {0.173 0.482 0.714} def
-/Slrgb {0.173 0.482 0.714} def
-16378 15859 17799 16089 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 15859 19549 16089 1 Srect
-/Ssrgb {0.173 0.482 0.714} def
-/Slrgb {0.173 0.482 0.714} def
-16465 16135 17799 16365 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 16135 19585 16365 1 Srect
-/Ssrgb {0.173 0.482 0.714} def
-/Slrgb {0.173 0.482 0.714} def
-15695 16411 17799 16642 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 16411 19649 16642 1 Srect
-/Ssrgb {0.173 0.482 0.714} def
-/Slrgb {0.173 0.482 0.714} def
-16240 16688 17799 16918 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 16688 19773 16918 1 Srect
-/Ssrgb {0.173 0.482 0.714} def
-/Slrgb {0.173 0.482 0.714} def
-16410 16964 17799 17194 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 16964 19843 17194 1 Srect
-/Ssrgb {0.173 0.482 0.714} def
-/Slrgb {0.173 0.482 0.714} def
-16486 17240 17799 17470 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 17240 19897 17470 1 Srect
-/Ssrgb {0.173 0.482 0.714} def
-/Slrgb {0.173 0.482 0.714} def
-15566 17517 17799 17747 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 17517 19926 17747 1 Srect
-/Ssrgb {0.173 0.482 0.714} def
-/Slrgb {0.173 0.482 0.714} def
-14604 17793 17799 18023 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 17793 20006 18023 1 Srect
-/Ssrgb {0.173 0.482 0.714} def
-/Slrgb {0.173 0.482 0.714} def
-16523 18069 17799 18299 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 18069 20196 18299 1 Srect
-/Ssrgb {0.173 0.482 0.714} def
-/Slrgb {0.173 0.482 0.714} def
-15430 18345 17799 18576 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 18345 20351 18576 1 Srect
-/Ssrgb {0.173 0.482 0.714} def
-/Slrgb {0.173 0.482 0.714} def
-16482 18622 17799 18852 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 18622 20377 18852 1 Srect
-/Ssrgb {0.173 0.482 0.714} def
-/Slrgb {0.173 0.482 0.714} def
-16281 18898 17799 19128 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 18898 20516 19128 1 Srect
-/Ssrgb {0.173 0.482 0.714} def
-/Slrgb {0.173 0.482 0.714} def
-14581 19174 17799 19404 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 19174 20682 19404 1 Srect
-/Ssrgb {0.173 0.482 0.714} def
-/Slrgb {0.173 0.482 0.714} def
-16504 19451 17799 19681 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 19451 20801 19681 1 Srect
-/Ssrgb {0.173 0.482 0.714} def
-/Slrgb {0.173 0.482 0.714} def
-16532 19727 17799 19957 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 19727 21455 19957 1 Srect
-/Ssrgb {0.173 0.482 0.714} def
-/Slrgb {0.173 0.482 0.714} def
-10780 20003 17799 20233 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 20003 22436 20233 1 Srect
-/Ssrgb {0.173 0.482 0.714} def
-/Slrgb {0.173 0.482 0.714} def
-15370 20279 17799 20510 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 20279 23879 20510 1 Srect
-/Ssrgb {0.173 0.482 0.714} def
-/Slrgb {0.173 0.482 0.714} def
-7051 20556 17799 20786 1 Srect
-/Ssrgb {0.714 0.173 0.631} def
-/Slrgb {0.714 0.173 0.631} def
-17799 20556 30432 20786 1 Srect
-/Slw 1.008 def
+7247 29172 12942 29440 1 Srect
+/Ssrgb {0.784 0.035 0.063} def
+/Slrgb {0.784 0.035 0.063} def
+7247 29440 12441 29707 1 Srect
+/Slw 1.440 def
 /Slrgb {0.000 0.000 0.000} def
-4445 3148 31216 3148 Sln
-5229 3148 5229 2993 Sln
-6067 3148 6067 2993 Sln
-6905 3148 6905 2993 Sln
-7743 3148 7743 2993 Sln
-8581 3148 8581 2993 Sln
-9419 3148 9419 2993 Sln
-10257 3148 10257 2993 Sln
-11095 3148 11095 2993 Sln
-11933 3148 11933 2993 Sln
-12771 3148 12771 2993 Sln
-13609 3148 13609 2993 Sln
-14447 3148 14447 2993 Sln
-15285 3148 15285 2993 Sln
-16123 3148 16123 2993 Sln
-16961 3148 16961 2993 Sln
-17799 3148 17799 2993 Sln
-18637 3148 18637 2993 Sln
-19475 3148 19475 2993 Sln
-20313 3148 20313 2993 Sln
-21151 3148 21151 2993 Sln
-21989 3148 21989 2993 Sln
-22827 3148 22827 2993 Sln
-23665 3148 23665 2993 Sln
-24503 3148 24503 2993 Sln
-25341 3148 25341 2993 Sln
-26179 3148 26179 2993 Sln
-27017 3148 27017 2993 Sln
-27855 3148 27855 2993 Sln
-28693 3148 28693 2993 Sln
-29531 3148 29531 2993 Sln
-30369 3148 30369 2993 Sln
-6067 3148 6067 2837 Sln
-6067 2247 0
-/Helvetica-0 findfont 622 yratio mul scalefont setfont
-(14) stringwidth pop add
-2 div xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 622
-(14) Stxtl
-(14) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-7743 3148 7743 2837 Sln
-7743 2247 0
-/Helvetica-0 findfont 622 yratio mul scalefont setfont
-(12) stringwidth pop add
-2 div xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 622
-(12) Stxtl
-(12) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-9419 3148 9419 2837 Sln
-9419 2247 0
-/Helvetica-0 findfont 622 yratio mul scalefont setfont
-(10) stringwidth pop add
-2 div xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 622
-(10) Stxtl
-(10) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-11095 3148 11095 2837 Sln
-11095 2247 0
-/Helvetica-0 findfont 622 yratio mul scalefont setfont
-(8) stringwidth pop add
-2 div xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 622
-(8) Stxtl
-(8) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-12771 3148 12771 2837 Sln
-12771 2247 0
-/Helvetica-0 findfont 622 yratio mul scalefont setfont
-(6) stringwidth pop add
-2 div xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 622
-(6) Stxtl
-(6) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-14447 3148 14447 2837 Sln
-14447 2247 0
-/Helvetica-0 findfont 622 yratio mul scalefont setfont
-(4) stringwidth pop add
-2 div xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 622
-(4) Stxtl
-(4) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-16123 3148 16123 2837 Sln
-16123 2247 0
-/Helvetica-0 findfont 622 yratio mul scalefont setfont
-(2) stringwidth pop add
-2 div xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 622
-(2) Stxtl
-(2) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-17799 3148 17799 2837 Sln
-17799 2247 0
-/Helvetica-0 findfont 622 yratio mul scalefont setfont
+7247 4497 30880 4497 Sln
+7247 4497 7247 4275 Sln
+8728 4497 8728 4275 Sln
+10209 4497 10209 4275 Sln
+11690 4497 11690 4275 Sln
+13171 4497 13171 4275 Sln
+14652 4497 14652 4275 Sln
+16133 4497 16133 4275 Sln
+17615 4497 17615 4275 Sln
+19096 4497 19096 4275 Sln
+20577 4497 20577 4275 Sln
+22058 4497 22058 4275 Sln
+23539 4497 23539 4275 Sln
+25020 4497 25020 4275 Sln
+26501 4497 26501 4275 Sln
+27983 4497 27983 4275 Sln
+29464 4497 29464 4275 Sln
+7247 4497 7247 4053 Sln
+7247 3209 0
+/Helvetica-0 findfont 889 yratio mul scalefont setfont
 (0) stringwidth pop add
 2 div xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 622
+0.000 889
 (0) Stxtl
 (0) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-19475 3148 19475 2837 Sln
-19475 2247 0
-/Helvetica-0 findfont 622 yratio mul scalefont setfont
-(2) stringwidth pop add
-2 div xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 622
-(2) Stxtl
-(2) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-21151 3148 21151 2837 Sln
-21151 2247 0
-/Helvetica-0 findfont 622 yratio mul scalefont setfont
-(4) stringwidth pop add
-2 div xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 622
-(4) Stxtl
-(4) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-22827 3148 22827 2837 Sln
-22827 2247 0
-/Helvetica-0 findfont 622 yratio mul scalefont setfont
-(6) stringwidth pop add
-2 div xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 622
-(6) Stxtl
-(6) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-24503 3148 24503 2837 Sln
-24503 2247 0
-/Helvetica-0 findfont 622 yratio mul scalefont setfont
-(8) stringwidth pop add
-2 div xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 622
-(8) Stxtl
-(8) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-26179 3148 26179 2837 Sln
-26179 2247 0
-/Helvetica-0 findfont 622 yratio mul scalefont setfont
+10209 4497 10209 4053 Sln
+10209 3209 0
+/Helvetica-0 findfont 889 yratio mul scalefont setfont
 (10) stringwidth pop add
 2 div xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 622
+0.000 889
 (10) Stxtl
 (10) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-27855 3148 27855 2837 Sln
-27855 2247 0
-/Helvetica-0 findfont 622 yratio mul scalefont setfont
-(12) stringwidth pop add
+13171 4497 13171 4053 Sln
+13171 3209 0
+/Helvetica-0 findfont 889 yratio mul scalefont setfont
+(20) stringwidth pop add
 2 div xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 622
-(12) Stxtl
-(12) stringwidth pop xratio div
+0.000 889
+(20) Stxtl
+(20) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-29531 3148 29531 2837 Sln
-29531 2247 0
-/Helvetica-0 findfont 622 yratio mul scalefont setfont
-(14) stringwidth pop add
+16133 4497 16133 4053 Sln
+16133 3209 0
+/Helvetica-0 findfont 889 yratio mul scalefont setfont
+(30) stringwidth pop add
 2 div xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 622
-(14) Stxtl
-(14) stringwidth pop xratio div
+0.000 889
+(30) Stxtl
+(30) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4445 3148 4445 21616 Sln
-4134 3976 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Vanuatu) stringwidth pop add
+19096 4497 19096 4053 Sln
+19096 3209 0
+/Helvetica-0 findfont 889 yratio mul scalefont setfont
+(40) stringwidth pop add
+2 div xratio div
+dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
+/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
+0.000 889
+(40) Stxtl
+(40) stringwidth pop xratio div
+dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
+pop pop pop pop
+22058 4497 22058 4053 Sln
+22058 3209 0
+/Helvetica-0 findfont 889 yratio mul scalefont setfont
+(50) stringwidth pop add
+2 div xratio div
+dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
+/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
+0.000 889
+(50) Stxtl
+(50) stringwidth pop xratio div
+dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
+pop pop pop pop
+25020 4497 25020 4053 Sln
+25020 3209 0
+/Helvetica-0 findfont 889 yratio mul scalefont setfont
+(60) stringwidth pop add
+2 div xratio div
+dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
+/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
+0.000 889
+(60) Stxtl
+(60) stringwidth pop xratio div
+dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
+pop pop pop pop
+27983 4497 27983 4053 Sln
+27983 3209 0
+/Helvetica-0 findfont 889 yratio mul scalefont setfont
+(70) stringwidth pop add
+2 div xratio div
+dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
+/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
+0.000 889
+(70) Stxtl
+(70) stringwidth pop xratio div
+dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
+pop pop pop pop
+7247 4497 7247 30880 Sln
+6802 5770 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Finland) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Vanuatu) Stxtl
-(Vanuatu) stringwidth pop xratio div
+0.000 480
+(Finland) Stxtl
+(Finland) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 4253 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Samoa) stringwidth pop add
+6802 6357 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Switzerland) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Samoa) Stxtl
-(Samoa) stringwidth pop xratio div
+0.000 480
+(Switzerland) Stxtl
+(Switzerland) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 4529 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Maldives) stringwidth pop add
+6802 6945 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Iceland) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Maldives) Stxtl
-(Maldives) stringwidth pop xratio div
+0.000 480
+(Iceland) Stxtl
+(Iceland) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 4805 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Swaziland) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Swaziland) Stxtl
-(Swaziland) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 5082 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Zambia) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Zambia) Stxtl
-(Zambia) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 5358 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Rwanda) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Rwanda) Stxtl
-(Rwanda) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 5634 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Timor-Leste) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Timor-Leste) Stxtl
-(Timor-Leste) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 5910 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Ghana) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Ghana) Stxtl
-(Ghana) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 6187 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Yemen) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Yemen) Stxtl
-(Yemen) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 6463 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Tanzania) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Tanzania) Stxtl
-(Tanzania) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 6739 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Azerbaijan) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Azerbaijan) Stxtl
-(Azerbaijan) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 7016 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Burundi) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Burundi) Stxtl
-(Burundi) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 7292 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Senegal) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Senegal) Stxtl
-(Senegal) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 7568 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Sri Lanka) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Sri Lanka) Stxtl
-(Sri Lanka) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 7844 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Burkina Faso) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Burkina Faso) Stxtl
-(Burkina Faso) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 8121 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Uganda) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Uganda) Stxtl
-(Uganda) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 8397 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Luxembourg) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Luxembourg) Stxtl
-(Luxembourg) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 8673 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Turkmenistan) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Turkmenistan) Stxtl
-(Turkmenistan) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 8950 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Moldova) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Moldova) Stxtl
-(Moldova) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 9226 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Haiti) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Haiti) Stxtl
-(Haiti) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 9502 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Mali) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Mali) Stxtl
-(Mali) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 9779 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Kyrgyzstan) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Kyrgyzstan) Stxtl
-(Kyrgyzstan) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 10055 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(South Sudan) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(South Sudan) Stxtl
-(South Sudan) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 10331 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Guatemala) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Guatemala) Stxtl
-(Guatemala) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 10607 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Portugal) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Portugal) Stxtl
-(Portugal) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 10884 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Cape Verde) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Cape Verde) Stxtl
-(Cape Verde) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 11160 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Ukraine) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Ukraine) Stxtl
-(Ukraine) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 11436 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Bulgaria) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Bulgaria) Stxtl
-(Bulgaria) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 11713 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Lithuania) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Lithuania) Stxtl
-(Lithuania) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 11989 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Belarus) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Belarus) Stxtl
-(Belarus) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 12265 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Ethiopia) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Ethiopia) Stxtl
-(Ethiopia) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 12541 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Cuba) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Cuba) Stxtl
-(Cuba) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 12818 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Germany) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Germany) Stxtl
-(Germany) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 13094 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Mauritius) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Mauritius) Stxtl
-(Mauritius) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 13370 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Somalia) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Somalia) Stxtl
-(Somalia) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 13647 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Macedonia) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Macedonia) Stxtl
-(Macedonia) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 13923 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
+6802 7533 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
 (The Netherlands) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
+0.000 480
 (The Netherlands) Stxtl
 (The Netherlands) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 14199 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Turkey) stringwidth pop add
+6802 8120 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Malta) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Turkey) Stxtl
-(Turkey) stringwidth pop xratio div
+0.000 480
+(Malta) Stxtl
+(Malta) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 14475 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
+6802 8708 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Cyprus) stringwidth pop add
+xratio div
+dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
+/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
+0.000 480
+(Cyprus) Stxtl
+(Cyprus) stringwidth pop xratio div
+dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
+pop pop pop pop
+6802 9295 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Italy) stringwidth pop add
+xratio div
+dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
+/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
+0.000 480
+(Italy) Stxtl
+(Italy) stringwidth pop xratio div
+dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
+pop pop pop pop
+6802 9883 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
 (Norway) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
+0.000 480
 (Norway) Stxtl
 (Norway) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 14752 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Palestine) stringwidth pop add
+6802 10470 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Spain) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Palestine) Stxtl
-(Palestine) stringwidth pop xratio div
+0.000 480
+(Spain) Stxtl
+(Spain) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 15028 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Brazil) stringwidth pop add
+6802 11058 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Austria) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Brazil) Stxtl
-(Brazil) stringwidth pop xratio div
+0.000 480
+(Austria) Stxtl
+(Austria) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 15304 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Kuwait) stringwidth pop add
+6802 11645 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(United Kingdom) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Kuwait) Stxtl
-(Kuwait) stringwidth pop xratio div
+0.000 480
+(United Kingdom) Stxtl
+(United Kingdom) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 15581 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Lebanon) stringwidth pop add
+6802 12233 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Belgium) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Lebanon) Stxtl
-(Lebanon) stringwidth pop xratio div
+0.000 480
+(Belgium) Stxtl
+(Belgium) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 15857 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Kenya) stringwidth pop add
+6802 12820 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Denmark) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Kenya) Stxtl
-(Kenya) stringwidth pop xratio div
+0.000 480
+(Denmark) Stxtl
+(Denmark) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 16133 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Armenia) stringwidth pop add
+6802 13408 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Luxembourg) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Armenia) Stxtl
-(Armenia) stringwidth pop xratio div
+0.000 480
+(Luxembourg) Stxtl
+(Luxembourg) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 16409 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Canada) stringwidth pop add
-xratio div
-dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
-/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Canada) Stxtl
-(Canada) stringwidth pop xratio div
-dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
-pop pop pop pop
-4134 16686 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
+6802 13995 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
 (Sweden) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
+0.000 480
 (Sweden) Stxtl
 (Sweden) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 16962 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Tunisia) stringwidth pop add
+6802 14583 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Greece) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Tunisia) Stxtl
-(Tunisia) stringwidth pop xratio div
+0.000 480
+(Greece) Stxtl
+(Greece) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 17238 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(India) stringwidth pop add
+6802 15171 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Germany) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(India) Stxtl
-(India) stringwidth pop xratio div
+0.000 480
+(Germany) Stxtl
+(Germany) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 17515 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Argentina) stringwidth pop add
+6802 15758 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(France) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Argentina) Stxtl
-(Argentina) stringwidth pop xratio div
+0.000 480
+(France) Stxtl
+(France) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 17791 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Uruguay) stringwidth pop add
+6802 16346 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Albania) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Uruguay) Stxtl
-(Uruguay) stringwidth pop xratio div
+0.000 480
+(Albania) Stxtl
+(Albania) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 18067 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Mexico) stringwidth pop add
+6802 16933 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Portugal) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Mexico) Stxtl
-(Mexico) stringwidth pop xratio div
+0.000 480
+(Portugal) Stxtl
+(Portugal) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 18344 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
+6802 17521 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Slovenia) stringwidth pop add
+xratio div
+dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
+/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
+0.000 480
+(Slovenia) Stxtl
+(Slovenia) stringwidth pop xratio div
+dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
+pop pop pop pop
+6802 18108 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Ireland) stringwidth pop add
+xratio div
+dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
+/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
+0.000 480
+(Ireland) Stxtl
+(Ireland) stringwidth pop xratio div
+dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
+pop pop pop pop
+6802 18696 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Macedonia) stringwidth pop add
+xratio div
+dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
+/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
+0.000 480
+(Macedonia) Stxtl
+(Macedonia) stringwidth pop xratio div
+dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
+pop pop pop pop
+6802 19283 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Croatia) stringwidth pop add
+xratio div
+dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
+/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
+0.000 480
+(Croatia) Stxtl
+(Croatia) stringwidth pop xratio div
+dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
+pop pop pop pop
+6802 19871 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Belarus) stringwidth pop add
+xratio div
+dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
+/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
+0.000 480
+(Belarus) Stxtl
+(Belarus) stringwidth pop xratio div
+dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
+pop pop pop pop
+6802 20458 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Czechia) stringwidth pop add
+xratio div
+dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
+/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
+0.000 480
+(Czechia) Stxtl
+(Czechia) stringwidth pop xratio div
+dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
+pop pop pop pop
+6802 21046 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Montenegro) stringwidth pop add
+xratio div
+dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
+/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
+0.000 480
+(Montenegro) Stxtl
+(Montenegro) stringwidth pop xratio div
+dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
+pop pop pop pop
+6802 21634 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Estonia) stringwidth pop add
+xratio div
+dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
+/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
+0.000 480
+(Estonia) Stxtl
+(Estonia) stringwidth pop xratio div
+dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
+pop pop pop pop
+6802 22221 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
 (Bosnia Herzegovina) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
+0.000 480
 (Bosnia Herzegovina) Stxtl
 (Bosnia Herzegovina) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 18620 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Nicaragua) stringwidth pop add
+6802 22809 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Poland) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Nicaragua) Stxtl
-(Nicaragua) stringwidth pop xratio div
+0.000 480
+(Poland) Stxtl
+(Poland) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 18896 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(French Polynesia) stringwidth pop add
+6802 23396 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Hungary) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(French Polynesia) Stxtl
-(French Polynesia) stringwidth pop xratio div
+0.000 480
+(Hungary) Stxtl
+(Hungary) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 19172 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(France, La Reunion) stringwidth pop add
+6802 23984 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Slovakia) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(France, La Reunion) Stxtl
-(France, La Reunion) stringwidth pop xratio div
+0.000 480
+(Slovakia) Stxtl
+(Slovakia) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 19449 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Libya) stringwidth pop add
+6802 24571 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Russian Federation) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Libya) Stxtl
-(Libya) stringwidth pop xratio div
+0.000 480
+(Russian Federation) Stxtl
+(Russian Federation) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 19725 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(El Salvador) stringwidth pop add
+6802 25159 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Latvia) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(El Salvador) Stxtl
-(El Salvador) stringwidth pop xratio div
+0.000 480
+(Latvia) Stxtl
+(Latvia) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 20001 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Korea, Republic of) stringwidth pop add
+6802 25746 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Ukraine) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Korea, Republic of) Stxtl
-(Korea, Republic of) stringwidth pop xratio div
+0.000 480
+(Ukraine) Stxtl
+(Ukraine) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 20278 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Bangladesh) stringwidth pop add
+6802 26334 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Serbia) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Bangladesh) Stxtl
-(Bangladesh) stringwidth pop xratio div
+0.000 480
+(Serbia) Stxtl
+(Serbia) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
-4134 20554 0
-/Helvetica-0 findfont 336 yratio mul scalefont setfont
-(Bolivia) stringwidth pop add
+6802 26921 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Lithuania) stringwidth pop add
 xratio div
 dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
 /fntsize {/Helvetica-0 findfont exch scalefont setfont } def
-0.000 336
-(Bolivia) Stxtl
-(Bolivia) stringwidth pop xratio div
+0.000 480
+(Lithuania) Stxtl
+(Lithuania) stringwidth pop xratio div
+dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
+pop pop pop pop
+6802 27509 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Bulgaria) stringwidth pop add
+xratio div
+dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
+/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
+0.000 480
+(Bulgaria) Stxtl
+(Bulgaria) stringwidth pop xratio div
+dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
+pop pop pop pop
+6802 28096 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Moldova) stringwidth pop add
+xratio div
+dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
+/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
+0.000 480
+(Moldova) Stxtl
+(Moldova) stringwidth pop xratio div
+dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
+pop pop pop pop
+6802 28684 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Romania) stringwidth pop add
+xratio div
+dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
+/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
+0.000 480
+(Romania) Stxtl
+(Romania) stringwidth pop xratio div
+dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
+pop pop pop pop
+6802 29272 0
+/Helvetica-0 findfont 480 yratio mul scalefont setfont
+(Central African Republic) stringwidth pop add
+xratio div
+dup 4 3 roll exch 0.000 cos mul sub 3 1 roll 0.000 sin mul sub 2 copy
+/fntsize {/Helvetica-0 findfont exch scalefont setfont } def
+0.000 480
+(Central African Republic) Stxtl
+(Central African Republic) stringwidth pop xratio div
 dup 4 3 roll exch 0.000 cos mul add 3 1 roll 0.000 sin mul add 2 copy
 pop pop pop pop
 S showpage
