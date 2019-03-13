@@ -1,4 +1,8 @@
-__00001R,__00001Q,rank
-"Liver",8863,1
-"Gallbladder",16115,2
-"Other",557611,3
+cancer_label,cancer_code,cases
+"Stomach",3,21654
+"Colorectum",4,67574
+"Pancreas",6,41589
+"Lung",8,86142
+"Breast",10,92381
+"Uterine cancer",12,29068
+"Other cancer",100,222736

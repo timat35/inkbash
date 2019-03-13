@@ -42,7 +42,7 @@ if (abs(sum(lab_percent) - 100) > 0.05):
 
 
 
-file_base = './pie'+str(nb_top)+'_base.svg'
+file_base = './pie10_base.svg'
 
 base = etree.parse(open(file_base))
 root = base.getroot()
