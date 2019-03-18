@@ -3,7 +3,7 @@ from lxml import etree
 import subprocess
 import csv
 
-graph_title = 'Female'
+graph_title = 'Male'
 file_eps = './temp/temp.eps'
 file_svg = file_eps.replace('.eps', '.svg')
 
@@ -18,7 +18,7 @@ nb_top = len(cancer_list)-1
 
 print(nb_top)
 
-file_final = './done/pie'+str(nb_top)+'_'+graph_title+'.svg'
+file_final = './done/pie_'+graph_title+'.svg'
 
 
 lab_cancer = ["none"]*(nb_top)
@@ -42,7 +42,7 @@ if (abs(sum(lab_percent) - 100) > 0.05):
 
 
 
-file_base = './pie10_base.svg'
+file_base = './pie_base.svg'
 
 base = etree.parse(open(file_base))
 root = base.getroot()
@@ -65,6 +65,8 @@ temp = copy.copy(root[3])
 root.remove(root[3])
 root.append(temp)
 
+j=0
+
 for child in root[4]:
     for new in child:
         for i in range(0,(nb_top)):
@@ -74,7 +76,11 @@ for child in root[4]:
                 new[0].text = lab_cancer[i]
         if new[0].text == "Title":
             new[0].text = graph_title
-        print(new[0].text)
+        if j <= (nb_top*2):
+            print(new[0].text)
+            j=j+1
+        else:
+            child.remove(new)
 
 
 base.write(file_final, pretty_print=False)

@@ -1,8 +1,8 @@
-cancer_label,cancer_code,cases
-"Stomach",3,21654
-"Colorectum",4,67574
-"Pancreas",6,41589
-"Lung",8,86142
-"Breast",10,92381
-"Uterine cancer",12,29068
-"Other cancer",100,222736
+cancer_label,cases
+"Stomach",23106
+"Colorectum",76483
+"Pancreas",56477
+"Lung",124142
+"Breast",91898
+"Uterine cancer",33231
+"Other cancer",256902
