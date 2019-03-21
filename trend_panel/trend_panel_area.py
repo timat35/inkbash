@@ -60,7 +60,7 @@ for file_base in os.listdir(dir_file):
     temp = root[:][2]
 
 
-    ind = 0
+    ind = area.index(int(area_code))
 
     x_trim = str(x[ind]*690)
     y_trim=str(960 + (y[ind]*1000))
@@ -69,7 +69,7 @@ for file_base in os.listdir(dir_file):
 
     x[ind] = x[ind]+1
 
-    if x[ind] == 7:
+    if x[ind] == 6:
         x[ind] = 0
         for i in range(ind,len(area)):
             y[i] = y[i]+1
@@ -79,7 +79,7 @@ for file_base in os.listdir(dir_file):
 
 
 
-panel_base.write('./trend_prediction_mortality_lung_europe.svg', pretty_print=False)
+panel_base.write('./trend_prediction_mortality_europe.svg', pretty_print=False)
 print("Done!!")
 
 

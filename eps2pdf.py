@@ -2,7 +2,7 @@
 import os
 import subprocess
 
-dir_base = 'C:/Projects/APC_NCI/_figs'
+dir_base = 'C:/Projects/collignon/_figs'
 
 for file_base in os.listdir(dir_base):
     if file_base[-3:] == 'eps':
@@ -14,6 +14,6 @@ for file_base in os.listdir(dir_base):
         path_pdf = os.path.join(dir_base, file_pdf)
 
         subprocess.call(['inkscape', '--without-gui', '--export-plain-svg='+path_svg, path_eps], shell=True)
-        print(file_base + "svg convert")
+        print(file_base + " svg convert")
         subprocess.call(['inkscape', '--without-gui', '--export-pdf='+path_pdf, path_svg], shell=True)
-        print(file_base + "pdf convert")
+        print(file_base + " pdf convert")
