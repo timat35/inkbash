@@ -5,7 +5,7 @@ import subprocess
 import csv
 import re
 
-graph_title = "Europe, both sexes"
+graph_title = "Latin America and the Caribbean, both sexes"
 file_tile = re.sub(r"\W+", r"_", graph_title)
 
 
@@ -144,8 +144,8 @@ for child in root[3]:
 
 
 base.write('./done/multi_top5_' + file_tile + '.svg', pretty_print=False)
-
-
+subprocess.Popen(['inkscape', '-f=' + './done/multi_top5_' + file_tile + '.svg'])
+print("look on inkscape")
 
 
 

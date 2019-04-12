@@ -161,7 +161,7 @@
 
 
 
-#delimit ;
+	#delimit ;
 	 
 	graph pie cases , 	
 			over(ghe_cause)

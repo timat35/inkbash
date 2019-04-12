@@ -3,13 +3,13 @@ from lxml import etree
 import subprocess
 import csv
 
-graph_title = 'Male'
+graph_title = 'CIS'
 file_eps = './temp/temp.eps'
 file_svg = file_eps.replace('.eps', '.svg')
 
-
+print(file_eps)
 subprocess.call(['inkscape','--without-gui', '--export-plain-svg='+file_svg, file_eps], shell=True)
-
+print(file_svg)
 
 
 label_file = open('./temp/cancer_info.csv', newline='')
