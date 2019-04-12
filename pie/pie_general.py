@@ -3,9 +3,11 @@ from lxml import etree
 import subprocess
 import csv
 
-graph_title = 'CIS'
+graph_title = 'South America'
 file_eps = './temp/temp.eps'
 file_svg = file_eps.replace('.eps', '.svg')
+
+minLabel = True
 
 print(file_eps)
 subprocess.call(['inkscape','--without-gui', '--export-plain-svg='+file_svg, file_eps], shell=True)
@@ -41,8 +43,10 @@ if (abs(sum(lab_percent) - 100) > 0.05):
     lab_percent[nb_top-1] =  round(lab_percent[nb_top-1] + (100 - round(sum(lab_percent),1)),1)
 
 
-
-file_base = './pie_base.svg'
+if minLabel:
+    file_base = './pie_base_minlabel.svg'
+else:
+    file_base = './pie_base.svg'
 
 base = etree.parse(open(file_base))
 root = base.getroot()

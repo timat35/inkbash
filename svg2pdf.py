@@ -1,9 +1,18 @@
 
 import os
 import subprocess
+import shutil
 
 # dir_base = 'C:/Projects/oropharynx/_figs/update'
 dir_base = './svg2pdf'
+dir_pdf2ppt = 'C:/tools/pdf2ppt/pdf'
+
+bool_slide = True
+
+if bool_slide:
+	for file_old in os.listdir(dir_pdf2ppt):
+		if file_old[-3:] == 'pdf':
+			os.unlink(os.path.join(dir_pdf2ppt,file_old))
 
 for file_base in os.listdir(dir_base):
     if file_base[-3:] == 'svg':
@@ -14,3 +23,14 @@ for file_base in os.listdir(dir_base):
 
         subprocess.call(['inkscape', '--without-gui', '--export-pdf='+path_pdf, path_svg], shell=True)
         print(file_base + " convert")
+
+        if bool_slide: 
+        	path_dst = os.path.join(dir_pdf2ppt,file_pdf)
+        	shutil.copy(path_pdf, path_dst)
+
+if bool_slide:
+	os.chdir('C:/tools/pdf2ppt/')
+	subprocess.check_call(['node', 'C:/tools/pdf2ppt/pdf2ppt.js'])
+	os.startfile('pdf2pptx.pptx', 'open')
+
+

@@ -1,12 +1,12 @@
 cancer_label,cases,rk_cases
-"Prostate",189923,1
-"Colorectum",62911,2
-"Lung",51586,3
-"Stomach",38821,4
-"Non-Hodgkin lymphoma",21817,5
-"Liver",20739,6
-"Bladder",20338,7
-"Leukaemia",20162,8
-"Kidney",19272,9
-"Pancreas",16952,10
-"All sites",218483,11
+"Breast",37721,1
+"Lung",26098,2
+"Colorectum",24230,3
+"Cervix uteri",19235,4
+"Stomach",14949,5
+"Pancreas",12763,6
+"Liver",10235,7
+"Ovary",9291,8
+"Brain, nervous system",8084,9
+"Leukaemia",8033,10
+"Other cancers",66114,11
