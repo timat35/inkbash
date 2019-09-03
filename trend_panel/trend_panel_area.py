@@ -79,7 +79,7 @@ for file_base in os.listdir(dir_file):
 
 
 
-panel_base.write('./trend_prediction_mortality_europe.svg', pretty_print=False)
+panel_base.write('./trend_prediction_test.svg', pretty_print=False)
 print("Done!!")
 
 

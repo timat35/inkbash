@@ -1,7 +1,7 @@
 from lxml import etree
 import subprocess
 
-dpi = 200
+dpi = 150
 
 
 base = etree.parse('./base_svg.svg')
@@ -33,7 +33,7 @@ for i in range(0, (nb_png)):
 
 print("annnnnd done!")
 
-subprocess.Popen(r'explorer  /select,"C:\Projects\inkbash\anim_png\anim_png\gitkeep.txt"')
+#subprocess.Popen(r'explorer  /select,"C:\Projects\inkbash\anim_png\anim_png\gitkeep.txt"')
 
 
 

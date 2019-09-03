@@ -1,12 +1,7 @@
-cancer_label,cases,rk_cases
-"Breast",37721,1
-"Lung",26098,2
-"Colorectum",24230,3
-"Cervix uteri",19235,4
-"Stomach",14949,5
-"Pancreas",12763,6
-"Liver",10235,7
-"Ovary",9291,8
-"Brain, nervous system",8084,9
-"Leukaemia",8033,10
-"Other cancers",66114,11
+ghe_cause,cases,rk_cases
+"Cardiovascular diseases",154177,1
+"Malignant neoplasms",133461,2
+"Intentional injuries",75438,3
+"Unintentional injuries",64747,4
+"Digestive diseases",45599,5
+"Other causes",214637,6
