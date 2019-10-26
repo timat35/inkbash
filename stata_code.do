@@ -1,3 +1,28 @@
+set trace off
+set more off
+clear all
+
+global dir_main "C:\Projects\Occasional\20190802Adalberto"
+global dir_figs  "${dir_main}\_figs"
+global dir_dict  "${dir_main}\_dict"
+global dir_dta "${dir_main}\_data"
+
+global dir_DATA "C:\data"
+global dir_SHAPE "${dir_DATA}\_shape"
+global dir_UNcode "${dir_DATA}\UNcode"
+global dir_UNDPpop "${dir_DATA}\UNDPpop"
+global dir_CI5plus "${dir_DATA}\CI5plus"
+global dir_CI5XI "${dir_DATA}\CI5XI"
+global dir_GLOBO2018 "${dir_DATA}\Globocan2018"
+global dir_GHE "${dir_DATA}\GHE_mortality"
+global dir_WHO_mortality  "${dir_DATA}\WHO_mortality"
+
+global dir_inkbash  "C:\Projects\inkbash"
+global dir_fix_label  "${dir_inkbash}\fix_label"
+
+global dir_maps_data "C:\Projects\Standard_maps\_data"
+
+
 *begin trend panel
 
 
@@ -121,67 +146,90 @@
 *begin pie
 
 
-	use "${dir_GHE_mortality}\GHE_mortality_2016.dta", clear
+		local sex 0
+	local x 6
+	local top = `x' - 1
 
-	keep if country_code == 250
-	keep if sex == 0 
-	drop if age == 7
+	insheet using "${dir_GHE}\GHE_mortality_2016.csv", clear
 
-	collapse (sum) cases, by(ghe* )
 
-	replace ghe_level = 2 if ghe_level == 0 
-	keep if ghe_level == 2
+	keep if country_code == 76 // 170 
+
+	keep if sex == `sex' 
+	keep if inrange(age,0,6)
+	keep if inlist(ghe_level,0,2)
+
+	collapse (sum) cases, by(ghe*)
+
 	gsort -cases
-
 	gen rk_cases =_n
-	drop if rk_cases > 6
+	keep if rk_cases <= `x'
+	list
+
+	tempfile temp_tot
+	save `temp_tot', replace
+
+	use `temp_tot', replace
+	gen percent = cases/cases[1]*100 
 
 
-	forvalues i=1(1)5 {
-
-		replace cases = cases - cases[_n+`i'] if rk == 1 
-
+	forvalue i = 1(1)`top' {
+		replace percent = percent[_n] - percent[_n+`i'] if rk == 1
 	}
 
-	replace rk_cases = 7 if rk == 1 
-	replace ghe_cause = "Other" if rk == 7 
-	sort  rk_cases
+	list ghe_cause percent
+		
+	use `temp_tot', replace
+	replace rk_cases = rk_cases -1
 
-	csv_merge ghe_code using "${dir_DATA}\_dict\cancer_color.csv", master_key(10) using_key(10)
+	forvalue i = 1(1)`top' {
+		replace cases = cases[_n] - cases[_n+`i'] if rk == 0
+	}
+
+	replace rk = `x' if rk == 0 
+
+	csv_merge  ghe_code using "${dir_DATA}\_dict\cancer_color_2018.csv", master_key(10) using_key(10)
 	keep if _m == 3
-	drop _m v5 colorhex cancer cancer_lab
-
-	sort rk_cases
-	local color1= color[1]
-	local color2= color[2]
-	local color3= color[3]
-	local color4= color[4]
-	local color5= color[5]
-	local color6= color[6]
+	drop _m 
+	sort  rk 
 
 
+	forvalue i = 0(1)`x' {
+		local color`i' = color[`i']
+	}
+
+	replace ghe_cause = "Other causes" if ghe_code == 0
 
 	#delimit ;
 	 
 	graph pie cases , 	
-			over(ghe_cause)
-			sort(rk_cases) 
+			over(rk) 
 			angle(90) 
-			fxsize( 100 )
 			
-			pie(1,  color ( `color1'))
-			pie(2,  color ( `color2'))
-			pie(3,  color ( `color3'))
-			pie(4,  color ( `color4'))
-			pie(5,  color ( `color5'))
-			pie(6,  color ( `color6'))
+			pie(1, color (`color1'))               
+			pie(2, color (`color2'))            				
+			pie(3, color (`color3'))                         
+			pie(4, color (`color4'))  
+			pie(5, color (`color5'))     				
+			pie(6, color (`color6')) 
+			pie(7, color (`color7'))
+			pie(8, color (`color8'))
+			pie(9, color (`color9'))
+			pie(10, color (`color10'))
+			pie(11, color (`color11'))			
 
 			plabel(1 percent, size(medium) color (black) gap(10))
 			plabel(2 percent, size(medium) color (black) gap(10))
 			plabel(3 percent, size(medium) color (black) gap(10))
 			plabel(4 percent, size(medium) color (black) gap(10))
 			plabel(5 percent, size(medium) color (black) gap(10))
-			plabel(6 percent, size(medium) color (black) gap(10))
+			plabel(6 percent, size(medium) color (black) gap(10))	
+			plabel(6 percent, size(medium) color (black) gap(10))	
+			plabel(7 percent, size(medium) color (black) gap(10))	
+			plabel(8 percent, size(medium) color (black) gap(10))	
+			plabel(9 percent, size(medium) color (black) gap(10))	
+			plabel(10 percent, size(medium) color (black) gap(10))	
+			plabel(11 percent, size(medium) color (black) gap(10))	
 			
 			legend(off) 
 			graphregion(style(none) istyle(none))
@@ -189,13 +237,10 @@
 	;
 	#delimit cr
 
-	keep rk ghe_cause cases
-	outsheet using  "${dir_inkbash}\pie\temp\cancer_info.csv", comma replace
-	
-
 	graph export "${dir_inkbash}\pie\temp\temp.eps", as(eps) replace
 
-
+	keep rk ghe_cause cases
+	outsheet using  "${dir_inkbash}\pie\temp\cancer_info.csv", comma replace
 
 *end 
 
@@ -209,178 +254,178 @@ local sex 0
 local country 900
 
 		
-		
-		use "${dir_GLOBO2018}\Globocan_asr_cases_cumrisk_CRC.dta", clear
-		drop asr cumrisk 
-		keep if sex == `sex'
+	
+	use "${dir_GLOBO2018}\Globocan_asr_cases_cumrisk_CRC.dta", clear
+	drop asr cumrisk 
+	keep if sex == `sex'
 
-		drop if inlist(cancer_code,17,37,38,40) // drop skin, other cancer and unspecified cancer 
-		
-		//regroup for cancer_tabacco related 
-		replace cancer_code =15 if inlist(cancer_code ,1,2,3,4,5,6,7,8,9,11,13,14,15,23,29,30 )
-		replace cancer_label = "Smoking related cancer" if cancer_code ==15 
-		
-		collapse (sum) cases (mean) py, by (type sex cancer* country*)
-		
-		keep if country_code == `country'
-		tab country_label
+	drop if inlist(cancer_code,17,37,38,40) // drop skin, other cancer and unspecified cancer 
+	
+	//regroup for cancer_tabacco related 
+	replace cancer_code =15 if inlist(cancer_code ,1,2,3,4,5,6,7,8,9,11,13,14,15,23,29,30 )
+	replace cancer_label = "Smoking related cancer" if cancer_code ==15 
+	
+	collapse (sum) cases (mean) py, by (type sex cancer* country*)
+	
+	keep if country_code == `country'
+	tab country_label
 
-		collapse (sum) cases py, by(type sex cancer*) 
+	collapse (sum) cases py, by(type sex cancer*) 
 
-		gsort +type sex -cases
-		bys type sex  : gen rk_cases =_n
-		keep if rk_cases <= 6
+	gsort +type sex -cases
+	bys type sex  : gen rk_cases =_n
+	keep if rk_cases <= 6
 
+	
+	
+	tempfile temp_tot
+	save `temp_tot', replace
+	
+	gen percent = 0 
+	forvalues i = 0(1)5 {
+		replace percent = (cases/(cases[_n-`i']))*100 if rk == `i' +1
+	}
+	
+	list
+
+
+		*begin pie
 		
+
+		use `temp_tot', replace
+
+		gen prop5 = 0 if rk == 1
+		replace prop5 = 1 if rk > 1
+
+		collapse (sum) cases, by(type prop5)
+		gen percent = (cases - cases[_n+1])*100 / cases if prop5 == 0
+		replace percent = cases *100 / cases[_n-1] if prop5 == 1 
 		
-		tempfile temp_tot
-		save `temp_tot', replace
+		forvalue i = 0(1)2 {
 		
-		gen percent = 0 
-		forvalues i = 0(1)5 {
-			replace percent = (cases/(cases[_n-`i']))*100 if rk == `i' +1
+		#delimit ;
+			 
+			graph pie percent if type == `i', 	
+					over(prop5) 
+					angle(90) 
+					
+					pie(2,  color (26 98 162))
+					pie(1,  color ( 220 220 220))
+
+					plabel(2 percent, size(medium) color (black) gap(5))
+					plabel(1 percent, size(medium) color (black) gap(5))
+					
+					legend(off) 
+					name(pie_`i', replace)
+				graphregion(style(none) istyle(none))
+				plotregion(style(none) istyle(none))
+			;
+			#delimit cr
+			
+			graph export "${dir_inkbash}\pie_bar\temp\pie`i'.eps", as(eps) replace
+
+			
 		}
+
+			
+
+
 		
-		list
 
+		*end
 
-			*begin pie
-			
+		*begin bar
+		
 
-			use `temp_tot', replace
-
-			gen prop5 = 0 if rk == 1
-			replace prop5 = 1 if rk > 1
-
-			collapse (sum) cases, by(type prop5)
-			gen percent = (cases - cases[_n+1])*100 / cases if prop5 == 0
-			replace percent = cases *100 / cases[_n-1] if prop5 == 1 
-			
-			forvalue i = 0(1)2 {
-			
-			#delimit ;
-				 
-				graph pie percent if type == `i', 	
-						over(prop5) 
-						angle(90) 
-						
-						pie(2,  color (26 98 162))
-						pie(1,  color ( 220 220 220))
-
-						plabel(2 percent, size(medium) color (black) gap(5))
-						plabel(1 percent, size(medium) color (black) gap(5))
-						
-						legend(off) 
-						name(pie_`i', replace)
-					graphregion(style(none) istyle(none))
-					plotregion(style(none) istyle(none))
-				;
-				#delimit cr
-				
-				graph export "${inkbash}\pie_bar\temp\pie`i'.eps", as(eps) replace
-
-				
-			}
-
-				
-
-
-			
-
-			*end
-
-			*begin bar
-			
-
-			
-			forvalue i = 0(1)2 {
-			
-				use `temp_tot', replace
-				replace rk_cases = rk_cases -1
-				drop if rk_cases == 0
-
-				merge m:1 cancer_code using "${dir_DATA}\_dict\cancer_color_2018.dta"
-				keep if _m == 3
-				drop _m
-				sort type rk 
-				
-				keep if type == `i'
-
-				local color1= color[1]
-				local color2= color[2]
-				local color3= color[3]
-				local color4= color[4]
-				local color5= color[5]
-
-
-				drop cancer* sex color
-				reshape wide cases, i(type) j(rk)
-
-				local total = cases1 + cases2 + cases3 + cases4 + cases5
-				gen bar1 = cases1 / `total'  
-				gen bar2 = cases2 / `total'  
-				gen bar3 = cases3 / `total'  
-				gen bar4 = cases4 / `total'  
-				gen bar5 = cases5 / `total'  
-
-				# delimit;
-					graph bar (asis) bar5 bar4 bar3 bar2 bar1  , 
-						stack
-						yscale(off)
-						bar(1, color ( `color5')) 
-						bar(2, color ( `color4')) 
-						bar(3, color ( `color3')) 
-						bar(4, color ( `color2')) 
-						bar(5, color ( `color1')) 
-						ylabel(,nolabels noticks nogrid)
-						legend(off)
-						xsize(4)
-						ysize(10)
-						name(bar_`i', replace)
-						graphregion(style(none) istyle(none))
-						plotregion(style(none) istyle(none))
-						;
-						
-				# delimit cr
-				
-				graph export "${inkbash}\pie_bar\temp\bar`i'.eps", as(eps) replace
-
-				
-				
-				}
-
+		
+		forvalue i = 0(1)2 {
+		
 			use `temp_tot', replace
 			replace rk_cases = rk_cases -1
 			drop if rk_cases == 0
+
 			merge m:1 cancer_code using "${dir_DATA}\_dict\cancer_color_2018.dta"
 			keep if _m == 3
-			drop _m 
+			drop _m
+			sort type rk 
+			
+			keep if type == `i'
 
-			gsort type -rk 
-			by type : egen tot=total(cases)
-			by type  : gen pos = sum(cases)
-			replace pos = pos - (cases/2) 
-			replace pos = ((pos/tot)*312.001) + 98.582 - 7.2755
-			replace pos = ((pos - 59.833)/1.33333)*(-1) 
-			drop py color 
-			gsort type rk
-			keep cancer_label pos
-			list
-			outsheet using "${inkbash}\pie_bar\temp\cancer_label.csv", comma replace
+			local color1= color[1]
+			local color2= color[2]
+			local color3= color[3]
+			local color4= color[4]
+			local color5= color[5]
+
+
+			drop cancer* sex color
+			reshape wide cases, i(type) j(rk)
+
+			local total = cases1 + cases2 + cases3 + cases4 + cases5
+			gen bar1 = cases1 / `total'  
+			gen bar2 = cases2 / `total'  
+			gen bar3 = cases3 / `total'  
+			gen bar4 = cases4 / `total'  
+			gen bar5 = cases5 / `total'  
+
+			# delimit;
+				graph bar (asis) bar5 bar4 bar3 bar2 bar1  , 
+					stack
+					yscale(off)
+					bar(1, color ( `color5')) 
+					bar(2, color ( `color4')) 
+					bar(3, color ( `color3')) 
+					bar(4, color ( `color2')) 
+					bar(5, color ( `color1')) 
+					ylabel(,nolabels noticks nogrid)
+					legend(off)
+					xsize(4)
+					ysize(10)
+					name(bar_`i', replace)
+					graphregion(style(none) istyle(none))
+					plotregion(style(none) istyle(none))
+					;
+					
+			# delimit cr
+			
+			graph export "${dir_inkbash}\pie_bar\temp\bar`i'.eps", as(eps) replace
 
 			
-			use `temp_tot', replace
-
-			quietly gen prop5 = 0 if rk == 1
-			quietly replace prop5 = 1 if rk > 1
-			gsort type +prop
-			quietly collapse (sum) cases, by(type prop5)
-			keep cases 
-			outsheet using "${inkbash}\pie_bar\temp\cancer_number.csv", comma replace
 			
+			}
 
-			
-			*end
+		use `temp_tot', replace
+		replace rk_cases = rk_cases -1
+		drop if rk_cases == 0
+		merge m:1 cancer_code using "${dir_DATA}\_dict\cancer_color_2018.dta"
+		keep if _m == 3
+		drop _m 
+
+		gsort type -rk 
+		by type : egen tot=total(cases)
+		by type  : gen pos = sum(cases)
+		replace pos = pos - (cases/2) 
+		replace pos = ((pos/tot)*312.001) + 98.582 - 7.2755
+		replace pos = ((pos - 59.833)/1.33333)*(-1) 
+		drop py color 
+		gsort type rk
+		keep cancer_label pos
+		list
+		outsheet using "${dir_inkbash}\pie_bar\temp\cancer_label.csv", comma replace
+
+		
+		use `temp_tot', replace
+
+		quietly gen prop5 = 0 if rk == 1
+		quietly replace prop5 = 1 if rk > 1
+		gsort type +prop
+		quietly collapse (sum) cases, by(type prop5)
+		keep cases 
+		outsheet using "${dir_inkbash}\pie_bar\temp\cancer_number.csv", comma replace
+		
+
+		
+		*end
 		
 	
 

@@ -1,7 +1,12 @@
-ghe_cause,cases,rk_cases
-"Cardiovascular diseases",154177,1
-"Malignant neoplasms",133461,2
-"Intentional injuries",75438,3
-"Unintentional injuries",64747,4
-"Digestive diseases",45599,5
-"Other causes",214637,6
+cancer_label,cases,rk_cases
+"Lung",147152,1
+"Lip, oral cavity",126349,2
+"Colorectum",98281,3
+"Liver",89992,4
+"Stomach",71077,5
+"Prostate",68562,6
+"Oesophagus",63532,7
+"Leukaemia",51945,8
+"Larynx",43650,9
+"Non-Hodgkin lymphoma",43535,10
+"Other cancers",430519,11
