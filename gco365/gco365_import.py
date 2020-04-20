@@ -3,7 +3,10 @@ from lxml import etree
 import subprocess
 
 
+# pour l'instant un seul template available: 1: landscape
 template = 1
+
+# "png" our "svg"
 import_base = "png"
 text1 = "upper title"
 text2 = "main title"
