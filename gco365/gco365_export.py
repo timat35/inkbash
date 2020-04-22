@@ -34,10 +34,5 @@ for file_base in os.listdir(dir_base):
 			dir_base + file_base], shell=True)
 
 
-
-
-
-
-
 print("Done")
 

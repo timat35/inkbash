@@ -3,15 +3,14 @@ from lxml import etree
 import subprocess
 
 
+heigth = 675 
+title = ""
 
-title = "map title"
-filename = "tweet_test_map"
-filebase = 'base_map'
+filename = "022_gco365"
+filebase = 'map-graph6'
 
-
-file_final = './result/'+ filename + '.svg'
-
-
+file_svg = './result/' + filename+ '.svg'
+file_png = './result/'+ filename + '.png'
 
 base = etree.parse(open('./base/'+ filebase +'.svg'))
 root = base.getroot()
@@ -22,20 +21,16 @@ for elem in root.getiterator():
 etree.cleanup_namespaces(root)
 
 #drop other style
-root[0].remove( root[0][1])  # drop other css
+root[0].remove( root[0][1])  # drop other .css
 
 
+# remove element not use
 for elem in root.getiterator():
 	if elem.tag == 'text':
-		if elem.text != None:
-			if 'â€“' in elem.text:
-				elem.text = elem.text.replace('â€“', '-')
-			if 'â‰¥' in elem.text:
-				elem.text = elem.text.replace('â‰¥', '≥')	
-		else:
+		if elem.text == None:
 			root.remove(elem)
 	
-
+# remove element not use
 for elem in root.getiterator():
 	if elem.tag == 'text':
 		if 'source' in elem.text:
@@ -47,9 +42,19 @@ for elem in root.getiterator():
 		if 'WHO All' in elem.text:
 			root.remove(elem)
 
-title = root[1].text
+# correction of label
+for elem in root.getiterator():
+	if elem.tag == 'text':
+		if 'â€“' in elem.text:
+			elem.text = elem.text.replace('â€“', '-')
+		if 'â‰¥' in elem.text:
+			elem.text = elem.text.replace('â‰¥', '≥')
 
+# get title from GCO
+if title == "":
+	title = root[1].text
 
+# keep removing element not use
 for child in root:
 	if child.tag == 'image':
 		root.remove(child)
@@ -64,15 +69,12 @@ for child in root:
 	if child.tag == 'text':
 		root.remove(child)
 
-
-
+# #get number of legend
+# nb_legend = len(root[4])-6
 
 
 # move legend
-root[4].set("transform", "translate(235.88221,-105.20411)")
-
-#remove element
-
+root[4].set("transform", "translate(235.88221,-103.4184)")
 
 
 
@@ -84,14 +86,14 @@ for child in root:
 		group.append(child)
 
 root.append(group)
-root[1].set("transform", "matrix(0.74487008,0,0,0.74487008,-61.426871,2.6436889)")
+root[1].set("transform", "matrix(0.80150477,0,0,0.80150477,-116.37924,20.356044)")
 
 
 
-root.set("width", "1194.07649")
-root.set("height", "595.50091")
+root.set("width", "1200")
+root.set("height", "675")
 
-dis = etree.parse(open('./base/gco_template_map.svg'))
+dis = etree.parse(open('./template/gco_template_map.svg'))
 root_dis = dis.getroot()
 
 # remove name space
@@ -108,7 +110,16 @@ for child in root_dis[3]:
 			child[0].text = title
 
 root.insert(root.index(root[0])+1,root_dis)
-base.write(file_final, pretty_print=False)
-subprocess.Popen(['inkscape', '-f=' + file_final])
-print("look on inkscape")
+base.write(file_svg, pretty_print=False)
+
+
+# export to png
+subprocess.call(['inkscape', 
+			'--without-gui', 
+			'--export-height=' + str(heigth), 
+			'--export-png=' + file_png, 
+			file_svg], shell=True)
+
+
+print(filename + ' is processed')
 
