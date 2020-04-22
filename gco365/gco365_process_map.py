@@ -2,12 +2,20 @@ import sys
 from lxml import etree
 import subprocess
 
+# parameter 
+# name of the base file in the folder base
+filebase = 'map-graph'
 
+# name of the final file
+filename = "022_gco365"
+
+# height of the graph can be edit
+# format is 16:9 (1200*)
 heigth = 675 
+
+# if title edit, this will overwrite GCO title
 title = ""
 
-filename = "022_gco365"
-filebase = 'map-graph6'
 
 file_svg = './result/' + filename+ '.svg'
 file_png = './result/'+ filename + '.png'
