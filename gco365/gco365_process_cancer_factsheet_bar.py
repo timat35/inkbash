@@ -5,22 +5,21 @@ import subprocess
 
 # parameter 
 # name of the base file in the folder base
-filebase = '10_8_9-Colorectum-fact-sheet'
-# Title must be udpate for the banner
-title = "Colorectal cancer"
+filebase = '6-Oesophagus-fact-sheet'
 
 # name of the final file
 filename = "031_gco365"
 
 #page of the graph
-page = '1'
-graphic_number = 1
+page = '2'
+
+# graphic number 3: bar chart by sex
+# graphic number 4: bar chart by type
+graphic_number = 3
 
 # height of the graph can be edit
 # format is 16:9 (1200*)
 heigth = 1200 
-
-
 
 
 file_svg = './result/' + filename+ '.svg'
@@ -45,17 +44,17 @@ etree.cleanup_namespaces(root)
 
 # regroup element
 
+bool_group = False 
 counter = 0
 
 group = etree.Element('g')
 
-
 for child in root[1]:
 	if child.tag == 'path':
-
 		if ('rgb(11.799622%,25.898743%,45.098877%)' in child.get('style')):
 			counter = counter+1
 			if (counter == graphic_number):
+				group = etree.Element('g')
 				group.append(child)
 
 	if (counter == graphic_number):
@@ -71,9 +70,7 @@ for child in root[1]:
 
 		group.append(child)
 	if (counter != graphic_number):
-		if (child.getparent() == root[1]):
-			root[1].remove(child)
-
+		root[1].remove(child)
 
 
 for child in root:
@@ -83,10 +80,10 @@ for child in root:
 
 #position of graphic
 
-if graphic_number == 1: 
-	group.set("transform", "matrix(2.9939913,0,0,2.9939913,-155.53437,-91.164833)")
-elif graphic_number == 2: 
-	group.set("transform", "matrix(2.9939913,0,0,2.9939913,-1030.8909,-91.164833)")
+if graphic_number == 3: 
+	group.set("transform", "matrix(2.9939928,0,0,2.9939928,-155.53439,-1660.8453)")
+elif graphic_number == 4: 
+	group.set("transform", "matrix(2.9939928,0,0,2.9939928,-1030.8913,-1660.8453)")
 
 root.append(group)
 
@@ -104,16 +101,18 @@ for elem in root_dis.getiterator():
 etree.cleanup_namespaces(root_dis)
 
 #manage banner
-
 for child in root_dis[3]:
 	for elem in child:
 		if elem.tag == 'text':
-			if elem[0].text == 'title':
-				elem[0].text = title
+			child.remove(elem)
+		if elem.tag == 'path':
+			child.remove(elem)
+				
 
 root_dis[3].set("transform", "matrix(2.6519685,0,0,2.6519685,1200.2178,760.91935)")
 
 root.insert(root.index(root[0])+1,root_dis[3])
+
 
 base.write(file_svg, pretty_print=False)
 subprocess.Popen(['inkscape', '-f=' + file_svg])

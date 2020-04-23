@@ -104,7 +104,6 @@ for elem in root_dis.getiterator():
 etree.cleanup_namespaces(root_dis)
 
 #manage banner
-
 for child in root_dis[3]:
 	for elem in child:
 		if elem.tag == 'text':
@@ -116,14 +115,14 @@ root_dis[3].set("transform", "matrix(2.6519685,0,0,2.6519685,1200.2178,760.91935
 root.insert(root.index(root[0])+1,root_dis[3])
 
 base.write(file_svg, pretty_print=False)
-subprocess.Popen(['inkscape', '-f=' + file_svg])
+# subprocess.Popen(['inkscape', '-f=' + file_svg])
 
-# export to png
-# subprocess.call(['inkscape', 
-# 			'--without-gui', 
-# 			'--export-height=' + str(heigth), 
-# 			'--export-png=' + file_png, 
-# 			file_svg], shell=True)
+export to png
+subprocess.call(['inkscape', 
+			'--without-gui', 
+			'--export-height=' + str(heigth), 
+			'--export-png=' + file_png, 
+			file_svg], shell=True)
 
 
 print(filename + ' is processed')

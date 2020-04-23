@@ -1,6 +1,12 @@
+# coding: utf-8
+
 import sys
 from lxml import etree
 import subprocess
+
+print (sys.version)
+print (sys.getfilesystemencoding())
+
 
 # parameter 
 # name of the base file in the folder base
@@ -108,8 +114,6 @@ root_dis = dis.getroot()
 for elem in root_dis.getiterator():
 	elem.tag = etree.QName(elem).localname
 etree.cleanup_namespaces(root_dis)
-
-
 
 # edit text 
 for child in root_dis[3]:
