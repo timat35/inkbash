@@ -9,15 +9,17 @@ filebase = '900-world-fact-sheets'
 # Title must be udpate for the banner
 title = "World"
 
+
 # name of the final file
 filename = "031_gco365"
 
 #page of the graph
 page = '1'
 
-# graphic number 1: pie chart new cases
-# graphic number 2: pie chart deaths
-graphic_number = 1
+# graphic number 2: pie chart new cases both sexes
+# graphic number 3: pie chart new cases males
+# graphic number 4: pie chart new cases females
+graphic_number = 4
 
 # height of the graph can be edit
 # format is 16:9 (1200*)
@@ -51,13 +53,17 @@ counter = 0
 group = etree.Element('g')
 
 
+
+# drop last element of the page
+
+
 for child in root[1]:
 	if child.tag == 'path':
 
 		if ('rgb(11.799622%,25.898743%,45.098877%)' in child.get('style')):
 			counter = counter+1
-			if (counter == graphic_number):
-				group.append(child)
+			continue;
+
 
 	if (counter == graphic_number):
 		# stop for last graph of the page
@@ -82,12 +88,17 @@ for child in root:
 		if 'surface' in child.get('id'):
 			root.remove(child)
 
+
+
 #position of graphic
 
-if graphic_number == 1: 
-	group.set("transform", "matrix(2.9939913,0,0,2.9939913,-155.53437,-91.164833)")
-elif graphic_number == 2: 
-	group.set("transform", "matrix(2.9939913,0,0,2.9939913,-1030.8909,-91.164833)")
+if graphic_number == 2: 
+	group.set("transform", "matrix(3.7498829,0,0,3.7498829,-716.01594,-376.87173)")
+elif graphic_number == 3:
+	group.set("transform", "matrix(3.7498829,0,0,3.7498829,-716.01594,-1291.4293)")
+elif graphic_number == 4:
+	group.remove(group[len(group)-1])
+	group.set("transform", "matrix(3.7498829,0,0,3.7498829,-716.01594,-2205.9869)")
 
 root.append(group)
 
@@ -95,7 +106,7 @@ root.set("width", "1200")
 root.set("height", "1200")
 
 
-dis = etree.parse(open('./template/gco_template_square.svg'))
+dis = etree.parse(open('./template/gco_template_square_subtitle.svg'))
 root_dis = dis.getroot()
 
 
@@ -111,19 +122,21 @@ for child in root_dis[3]:
 			if elem[0].text == 'title':
 				elem[0].text = title
 
-root_dis[3].set("transform", "matrix(2.6519685,0,0,2.6519685,1200.2178,760.91935)")
+
+
+root_dis[3].set("transform", "matrix(3.9748031,0,0,3.9748031,1799.5046,1140.4753)")
 
 root.insert(root.index(root[0])+1,root_dis[3])
 
 base.write(file_svg, pretty_print=False)
-subprocess.Popen(['inkscape', '-f=' + file_svg])
+# subprocess.Popen(['inkscape', '-f=' + file_svg])
 
-# # export to png
-# subprocess.call(['inkscape', 
-# 			'--without-gui', 
-# 			'--export-height=' + str(heigth), 
-# 			'--export-png=' + file_png, 
-# 			file_svg], shell=True)
+# export to png
+subprocess.call(['inkscape', 
+			'--without-gui', 
+			'--export-height=' + str(heigth), 
+			'--export-png=' + file_png, 
+			file_svg], shell=True)
 
 
 print(filename + ' is processed')
