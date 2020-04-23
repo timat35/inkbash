@@ -150,14 +150,14 @@ root_dis[3].set("transform", "matrix(3.9748031,0,0,3.9748031,1799.5046,1140.4753
 root.insert(root.index(root[0])+1,root_dis[3])
 
 base.write(file_svg, pretty_print=False)
-subprocess.Popen(['inkscape', '-f=' + file_svg])
+# subprocess.Popen(['inkscape', '-f=' + file_svg])
 
 # export to png
-# subprocess.call(['inkscape', 
-# 			'--without-gui', 
-# 			'--export-height=' + str(heigth), 
-# 			'--export-png=' + file_png, 
-# 			file_svg], shell=True)
+subprocess.call(['inkscape', 
+			'--without-gui', 
+			'--export-height=' + str(heigth), 
+			'--export-png=' + file_png, 
+			file_svg], shell=True)
 
 
 print(filename + ' is processed')
