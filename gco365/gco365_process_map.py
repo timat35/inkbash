@@ -10,10 +10,10 @@ print (sys.getfilesystemencoding())
 
 # parameter 
 # name of the base file in the folder base
-filebase = 'map-graph'
+filebase = '#map_1'
 
 # name of the final file
-filename = "022_gco365"
+filename = "#map_1_processed"
 
 # height of the graph can be edit
 # format is 16:9 (1200*)
@@ -34,8 +34,8 @@ for elem in root.getiterator():
 	elem.tag = etree.QName(elem).localname
 etree.cleanup_namespaces(root)
 
-#drop other style
-root[0].remove( root[0][1])  # drop other .css
+# drop other style
+# root[0].remove( root[0][1])  # drop other .css
 
 
 # remove element not use
@@ -47,22 +47,24 @@ for elem in root.getiterator():
 # remove element not use
 for elem in root.getiterator():
 	if elem.tag == 'text':
-		if 'source' in elem.text:
-			root.remove(elem)
-		if 'Graph production' in elem.text:
-			root.remove(elem)
-		if 'World Health' in elem.text:
-			root.remove(elem)
-		if 'WHO All' in elem.text:
-			root.remove(elem)
+		if (elem.text != None):
+			if 'source' in elem.text:
+				root.remove(elem)
+			if 'Graph production' in elem.text:
+				root.remove(elem)
+			if 'World Health' in elem.text:
+				root.remove(elem)
+			if 'WHO All' in elem.text:
+				root.remove(elem)
 
 # correction of label
 for elem in root.getiterator():
 	if elem.tag == 'text':
-		if 'â€“' in elem.text:
-			elem.text = elem.text.replace('â€“', '-')
-		if 'â‰¥' in elem.text:
-			elem.text = elem.text.replace('â‰¥', '≥')
+		if (elem.text != None):
+			if 'â€“' in elem.text:
+				elem.text = elem.text.replace('â€“', '-')
+			if 'â‰¥' in elem.text:
+				elem.text = elem.text.replace('â‰¥', '≥')
 
 # get title from GCO
 if title == "":
@@ -88,11 +90,12 @@ for child in root:
 
 
 # move legend
-root[4].set("transform", "translate(235.88221,-103.4184)")
+root[4].set("transform", "translate(-33.11779,-168.4184)")
+
+# base.write(file_svg, pretty_print=False)
 
 
-
-#group element 
+# group element 
 
 group = etree.Element('g')
 for child in root:
@@ -100,7 +103,7 @@ for child in root:
 		group.append(child)
 
 root.append(group)
-root[1].set("transform", "matrix(0.80150477,0,0,0.80150477,-116.37924,20.356044)")
+root[1].set("transform", "matrix(0.80150477,0,0,0.80150477,99.244218,20.356044)")
 
 
 
