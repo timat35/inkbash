@@ -1,19 +1,23 @@
 # coding: utf-8
 
-import sys
+# encoding=utf8  
+import sys  
+
+# python 2.x hack for encoding system
+if (sys.version[0] == '2'):
+	reload(sys)  
+	sys.setdefaultencoding('utf8')
+	
+
 from lxml import etree
 import subprocess
 
-print (sys.version)
-print (sys.getfilesystemencoding())
-
-
 # parameter 
 # name of the base file in the folder base
-filebase = '#map_1'
+filebase = 'map-graph_1'
 
 # name of the final file
-filename = "#map_1_processed"
+filename = "map_result"
 
 # height of the graph can be edit
 # format is 16:9 (1200*)
