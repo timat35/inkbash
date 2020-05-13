@@ -31,14 +31,14 @@ heigth = 1200
 file_svg = './result/' + filename+ '.svg'
 file_png = './result/'+ filename + '.png'
 
-# print('convert pdf to svg...')
-# # PDF factsheet to svg
-# subprocess.call([os.path.dirname(__file__) + '/pdf2svg/pdf2svg.exe', 
-# 			'./base/'+ filebase +'.pdf', 
-# 			'./temp/temp.svg',
-# 			page
-# 			], shell=True)
-# print('convertion done.')
+print('convert pdf to svg...')
+# PDF factsheet to svg
+subprocess.call([os.path.dirname(__file__) + '/pdf2svg/pdf2svg.exe', 
+			'./base/'+ filebase +'.pdf', 
+			'./temp/temp.svg',
+			page
+			], shell=True)
+print('convertion done.')
 
 base = etree.parse(open('./temp/temp.svg'))
 root = base.getroot()
