@@ -7,12 +7,12 @@ from lxml import etree
 import subprocess
 
 
-regex = r"map_(.+)_(.+)_(.+)_(.+)"
+regex = r"map_(.+)_(.+)_(.+)_(.+)_(.+)"
 cancer_name = pd.read_csv('./template/map_R_cancer_name.csv')
 
 regex_svg = r"(.*)\.svg"
 
-folder_base = 'C:/Projects/globocan2018_graph/map_by_site/asr'
+folder_base = 'C:/Projects/globocan2018_graph/map_by_site/cumrisk_abs'
 
 for file in os.listdir(folder_base):
 # parameter 
@@ -42,12 +42,12 @@ for file in os.listdir(folder_base):
 		elif title_key == 'cumrisk':
 			title_base = 'Estimated cumulative risk of ' + title_type + ' in 2018'
 
-		title_cancer = cancer_name[cancer_name["file_cancer"] == re.sub(regex, r"\4", filebase)]['cancer_name'].values[0]
+		title_cancer = cancer_name[cancer_name["file_cancer"] == re.sub(regex, r"\5", filebase)]['cancer_name'].values[0]
 
 		title = title_base + ', ' + title_cancer + ', ' + title_sex
 
-		file_svg = './result/map_quantile/' + filename+ '.svg'
-		file_png = './result/map_quantile/'+ filename + '.png'
+		file_svg = './result/map/cumrisk_absolute/' + 'temp'+ '.svg'
+		file_png = './result/map/cumrisk_absolute/'+ filename + '.png'
 
 
 

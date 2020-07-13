@@ -7,6 +7,5 @@ other/done/*.svg
 other/done/*.pdf
 /anim_png/anim_png/*.png
 /gco365/examples
-/gco365/result/map_quantile
-/gco365/result/map_absolute
+/gco365/result/map
 /gco365/factsheet
