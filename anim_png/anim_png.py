@@ -1,7 +1,7 @@
 from lxml import etree
 import subprocess
 
-dpi = 1200
+dpi = 200
 
 
 base = etree.parse('./base_svg.svg')

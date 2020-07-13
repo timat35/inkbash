@@ -4,35 +4,30 @@ import re
 from lxml import etree
 import subprocess
 
+
 regex = r"(.*)\.pdf"
-regex_cancer_name = r".*?-(.*)-fact.*\.pdf"
 
-files = [f for f in os.listdir('./factsheet') if os.path.isfile(os.path.join('./factsheet',f))]
-# files = [f for f in os.listdir('./factsheet') if f == "1-Lip-oral-cavity-fact-sheet.pdf"]
-for filebase in files:
-
-	# parameter 
-	# name of the base file in the folder base
-	filename =  "pie-both-" +re.sub(regex, r"\1", filebase)  
-	cancer_name = re.sub(regex_cancer_name, r"\1", filebase)  
-	cancer_label =cancer_name.replace('-', ' ')
-	title = cancer_label + ' cancer'
-
-	title = re.sub(r"(.*cancer) cancer", r"\1", title)
-	print(title)
-
+for filebase in os.listdir('./factsheet'):
+# parameter 
+# name of the base file in the folder base
+	
+	print(filebase)
+	filename =  "bar-type-" +re.sub(regex, r"\1", filebase)  
 
 	#page of the graph
-	page = '1'
+	page = '2'
 
+	# graphic number 3: bar chart by sex
+	# graphic number 4: bar chart by type
+	graphic_number = 4
 
 	# height of the graph can be edit
 	# format is 16:9 (1200*)
-	heigth = 675 
+	heigth = 1200 
 
 
-	file_svg = './factsheet/pie-both/' + filename+ '.svg'
-	file_png = './factsheet/pie-both/'+ filename + '.png'
+	file_svg = './factsheet/bar-type/' + filename+ '.svg'
+	file_png = './factsheet/bar-type/'+ filename + '.png'
 
 	print('convert pdf to svg...')
 	# PDF factsheet to svg
@@ -53,48 +48,54 @@ for filebase in files:
 
 	# regroup element
 
+	bool_group = False 
 	counter = 0
-	bool_add = False
+
 	group = etree.Element('g')
 
-
 	for child in root[1]:
-
-
 		if child.tag == 'path':
 			if ('rgb(11.799622%,25.898743%,45.098877%)' in child.get('style')):
 				counter = counter+1
-				if (counter == 1):
-					bool_add = True
+				if (counter == graphic_number):
+					group = etree.Element('g')
 					group.append(child)
-				elif (counter == 2):
-					bool_add = True
-					group.append(child)
-				else:
-					bool_add = False
 
+		if (counter == graphic_number):
+			# stop for last graph of the page
+			if len(child)==1:
+				if (child[0].tag == "path"):
+					if ('rgb(4.299927%,50.19989%,71.798706%)' in child[0].get('style')):
+						break
+			# stop for last graph of the page
+			if (child.get('style') != None):
+				if ('rgb(4.299927%,50.19989%,71.798706%)' in child.get('style')):
+					break
 
-		if bool_add:
 			group.append(child)
-		else:
+		if (counter != graphic_number):
 			root[1].remove(child)
 
 
-
-
+	for child in root:
+		if (child.get('id') != None):
+			if 'surface' in child.get('id'):
+				root.remove(child)
 
 	#position of graphic
 
-
-	group.set("transform", "matrix(2.5645595,0,0,2.5645595,-465.45645,-13.056053)")
+	if graphic_number == 3: 
+		group.set("transform", "matrix(2.9939928,0,0,2.9939928,-155.53439,-1660.8453)")
+	elif graphic_number == 4: 
+		group.set("transform", "matrix(2.9939928,0,0,2.9939928,-1030.8913,-1660.8453)")
 
 	root.append(group)
 
 	root.set("width", "1200")
-	root.set("height", "675")
+	root.set("height", "1200")
 
 
-	dis = etree.parse(open('./template/gco_template_landscape_pie.svg'))
+	dis = etree.parse(open('./template/gco_template_square.svg'))
 	root_dis = dis.getroot()
 
 
@@ -107,12 +108,15 @@ for filebase in files:
 	for child in root_dis[3]:
 		for elem in child:
 			if elem.tag == 'text':
-				if elem[0].text == 'title':
-					elem[0].text = title
+				child.remove(elem)
+			if elem.tag == 'path':
+				child.remove(elem)
+					
 
-	root_dis[3].set("transform", "matrix(4.7146107,0,0,4.7146107,1893.7854,704.13864)")
+	root_dis[3].set("transform", "matrix(2.6519685,0,0,2.6519685,1200.2178,760.91935)")
 
 	root.insert(root.index(root[0])+1,root_dis[3])
+
 
 	base.write(file_svg, pretty_print=False)
 	# subprocess.Popen(['inkscape', '-f=' + file_svg])

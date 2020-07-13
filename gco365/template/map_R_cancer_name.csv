@@ -1,0 +1,39 @@
+file_cancer,cancer_name
+Allsites,all cancers
+Allsitesexclskin,all cancers excl. non-melanoma skin cancer
+Bladder,bladder
+Brainnervoussystem,"brain, central nervous system"
+Breast,breast
+Cervixuteri,cervix uteri
+Colorectum,colorectum
+Corpusuteri,corpus uteri
+Gallbladder,gallbladder
+Hodgkinlymphoma,Hodgkin lymphoma
+Hypopharynx,hypopharynx
+Kaposisarcoma,kaposi sarcoma
+Kidney,kidney
+Larynx,larynx
+Leukaemia,leukaemia
+Liporalcavity,"lip, oral cavity"
+Liver,Liver
+Lung,Lung
+Melanomaofskin,melanoma of skin
+Mesothelioma,mesothelioma
+Multiplemyeloma,multiple myeloma
+Nasopharynx,nasopharynx
+NonHodgkinlymphoma,non-hodgkin lymphoma
+Oesophagus,oesophagus
+Oropharynx,oropharynx
+Othersites,other sites
+Ovary,ovary
+Pancreas,pancreas
+Penis,penis
+Prostate,prostate
+Salivaryglands,salivary glands
+Skin,non-melanoma skin cancer
+Stomach,stomach
+Testis,testis
+Thyroid,thyroid
+Unspecified,unspecified
+Vagina,vagina
+Vulva,vulva
