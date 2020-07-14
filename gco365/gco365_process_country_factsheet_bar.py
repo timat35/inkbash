@@ -5,9 +5,9 @@ import subprocess
 
 # parameter 
 # name of the base file in the folder base
-filebase = '788-tunisia-fact-sheets'
+filebase = '903-africa-fact-sheets'
 # Title must be udpate for the banner
-title = "Tunisia"
+title = "Africa"
 
 # name of the final file
 filename = "grr_096_gco365"
@@ -51,9 +51,11 @@ counter = 0
 
 group = etree.Element('g')
 
+
+
 for child in root[1]:
 	if child.tag == 'path':
-		if ('rgb(11.799622%,25.898743%,45.098877%)' in child.get('style')):
+		if ('rgb(11.799622%,25.898743%,45.098877%)' in child.get('style')) | ('rgb(11.759949%,25.878906%,45.098877%)' in child.get('style')):
 			counter = counter+1
 			if (counter == graphic_number):
 				group = etree.Element('g')

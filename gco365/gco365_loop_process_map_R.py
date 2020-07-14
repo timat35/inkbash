@@ -12,7 +12,7 @@ cancer_name = pd.read_csv('./template/map_R_cancer_name.csv')
 
 regex_svg = r"(.*)\.svg"
 
-folder_base = 'C:/Projects/globocan2018_graph/map_by_site/cumrisk_abs'
+folder_base = 'C:/Projects/globocan2018_graph/map_by_site/asr_abs'
 
 for file in os.listdir(folder_base):
 # parameter 
@@ -20,7 +20,6 @@ for file in os.listdir(folder_base):
 	matches = re.search(regex_svg,file)
 	if matches:
 		filebase = re.sub(regex_svg, r"\1", file)
-		print(filebase)
 
 		filename = "tw_"+filebase
 
@@ -42,12 +41,14 @@ for file in os.listdir(folder_base):
 		elif title_key == 'cumrisk':
 			title_base = 'Estimated cumulative risk of ' + title_type + ' in 2018'
 
+
 		title_cancer = cancer_name[cancer_name["file_cancer"] == re.sub(regex, r"\5", filebase)]['cancer_name'].values[0]
 
+		
 		title = title_base + ', ' + title_cancer + ', ' + title_sex
-
-		file_svg = './result/map/cumrisk_absolute/' + 'temp'+ '.svg'
-		file_png = './result/map/cumrisk_absolute/'+ filename + '.png'
+		print('\n' + title +'\n' )
+		file_svg = './result/map/asr_absolute/' + 'temp'+ '.svg'
+		file_png = './result/map/asr_absolute/'+ filename + '.png'
 
 
 
@@ -68,11 +69,7 @@ for file in os.listdir(folder_base):
 		root[2].remove(root[2][1])
 		root[2].remove(root[2][0])
 
-			
-
-		# get title from GCO
-		if title == "":
-			title = root[1].text
+		
 
 
 
@@ -103,7 +100,7 @@ for file in os.listdir(folder_base):
 		etree.cleanup_namespaces(root_dis)
 
 		# edit text 
-		for child in root_dis[3]:
+		for child in root_dis[3][1]:
 			if child.tag == 'text':
 				if child[0].text == 'title':
 					child[0].text = title

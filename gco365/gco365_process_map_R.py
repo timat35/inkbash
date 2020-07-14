@@ -22,7 +22,7 @@ cancer_name = pd.read_csv('./template/map_R_cancer_name.csv')
 
 # parameter 
 # name of the base file in the folder base
-filebase = 'map_female_incidence_asr_Colorectum'
+filebase = 'map_both_incidence_asr_Allsites'
 
 # name of the final file
 filename = "tw_"+filebase
