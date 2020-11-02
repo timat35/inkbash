@@ -68,7 +68,7 @@ for child in root[1]:
 
 
 	if child.tag == 'path':
-		if ('rgb(11.799622%,25.898743%,45.098877%)' in child.get('style')):
+		if ('rgb(11.799622%,25.898743%,45.098877%)' in child.get('style')) | ('rgb(11.759949%,25.878906%,45.098877%)' in child.get('style')):
 			counter = counter+1
 			if (counter == 2):
 				bool_add = True
@@ -76,7 +76,7 @@ for child in root[1]:
 	
 	if child.tag == 'g':
 		if child[0].tag == 'use':
-			if ('rgb(4.299927%,50.19989%,71.798706%)' in child.get('style')):
+			if ('rgb(4.299927%,50.19989%,71.798706%)' in child.get('style')) | ('rgb(4.309082%,50.19989%,71.759033%)' in child.get('style')):
 				bool_mark = True
 
 	if child.tag == 'g':
@@ -98,23 +98,31 @@ counter_line = 0
 counter = 0
 
 for child in group:
-	if child.tag == 'path':
-		if ('rgb(79.998779%,79.998779%,79.998779%)' in child.get('style')):
-			counter_line = counter_line+1
-			if (counter_line == 4):
-				group.remove(child)
-			if (counter_line > 7):
-				group.remove(child)
+		if child.tag == 'path':
+			if ('rgb(79.998779%,79.998779%,79.998779%)' in child.get('style')):
+				counter_line = counter_line+1
+				if (counter_line == 4):
+					group.remove(child)
+				if (counter_line > 7):
+					group.remove(child)
 
-		if ('rgb(11.799622%,25.898743%,45.098877%)' in child.get('style')):
-			counter = counter+1
-			if (counter == 6):
-				group.remove(child)
+			if ('rgb(11.799622%,25.898743%,45.098877%)' in child.get('style')) | ('rgb(11.759949%,25.878906%,45.098877%)' in child.get('style')):
+				counter = counter+1
+				if (counter == 6):
+					group.remove(child)
 
-for child in root:
-	if (child.get('id') != None):
-		if 'surface' in child.get('id'):
-			root.remove(child)
+	for child in root:
+		if (child.get('id') != None):
+			if 'surface' in child.get('id'):
+				root.remove(child)
+
+	nb_rect = 0
+	for child in group:
+		if child.tag == 'path':
+			if ('rgb(11.799622%,25.898743%,45.098877%)' in child.get('style')) | ('rgb(11.759949%,25.878906%,45.098877%)' in child.get('style')):
+				nb_rect = nb_rect+1
+				if nb_rect == 6:
+					group.remove(child)
 
 
 

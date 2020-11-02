@@ -65,11 +65,11 @@ for child in root[1]:
 		# stop for last graph of the page
 		if len(child)==1:
 			if (child[0].tag == "path"):
-				if ('rgb(4.299927%,50.19989%,71.798706%)' in child[0].get('style')):
+				if ('rgb(4.299927%,50.19989%,71.798706%)' in child[0].get('style')) | ('rgb(4.309082%,50.19989%,71.759033%)' in child[0].get('style')):
 					break
 		# stop for last graph of the page
 		if (child.get('style') != None):
-			if ('rgb(4.299927%,50.19989%,71.798706%)' in child.get('style')):
+			if ('rgb(4.299927%,50.19989%,71.798706%)' in child.get('style')) | ('rgb(4.309082%,50.19989%,71.759033%)' in child.get('style')):
 				break
 
 		group.append(child)
