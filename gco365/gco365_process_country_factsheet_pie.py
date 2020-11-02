@@ -60,7 +60,7 @@ group = etree.Element('g')
 for child in root[1]:
 	if child.tag == 'path':
 
-		if ('rgb(11.799622%,25.898743%,45.098877%)' in child.get('style')):
+		if ('rgb(11.799622%,25.898743%,45.098877%)' in child.get('style')) | ('rgb(11.759949%,25.878906%,45.098877%)' in child.get('style')):
 			counter = counter+1
 			continue;
 
@@ -69,11 +69,11 @@ for child in root[1]:
 		# stop for last graph of the page
 		if len(child)==1:
 			if (child[0].tag == "path"):
-				if ('rgb(4.299927%,50.19989%,71.798706%)' in child[0].get('style')):
+				if ('rgb(4.299927%,50.19989%,71.798706%)' in child[0].get('style')) | ('rgb(4.309082%,50.19989%,71.759033%)' in child[0].get('style')):
 					break
 		# stop for last graph of the page
 		if (child.get('style') != None):
-			if ('rgb(4.299927%,50.19989%,71.798706%)' in child.get('style')):
+			if ('rgb(4.299927%,50.19989%,71.798706%)' in child.get('style')) | ('rgb(4.309082%,50.19989%,71.759033%)' in child.get('style')):
 				break
 
 		group.append(child)
