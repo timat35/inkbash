@@ -5,9 +5,9 @@ import subprocess
 
 # parameter 
 # name of the base file in the folder base
-filebase = '788-tunisia-fact-sheets'
+filebase = '591-panama-fact-sheets'
 # Title must be udpate for the banner
-title = "Tunisia"
+title = "Panama"
 
 
 # name of the final file
@@ -98,18 +98,18 @@ counter_line = 0
 counter = 0
 
 for child in group:
-		if child.tag == 'path':
-			if ('rgb(79.998779%,79.998779%,79.998779%)' in child.get('style')):
-				counter_line = counter_line+1
-				if (counter_line == 4):
-					group.remove(child)
-				if (counter_line > 7):
-					group.remove(child)
+	if child.tag == 'path':
+		if ('rgb(79.998779%,79.998779%,79.998779%)' in child.get('style')):
+			counter_line = counter_line+1
+			if (counter_line == 4):
+				group.remove(child)
+			if (counter_line > 7):
+				group.remove(child)
 
-			if ('rgb(11.799622%,25.898743%,45.098877%)' in child.get('style')) | ('rgb(11.759949%,25.878906%,45.098877%)' in child.get('style')):
-				counter = counter+1
-				if (counter == 6):
-					group.remove(child)
+		if ('rgb(11.799622%,25.898743%,45.098877%)' in child.get('style')) | ('rgb(11.759949%,25.878906%,45.098877%)' in child.get('style')):
+			counter = counter+1
+			if (counter == 6):
+				group.remove(child)
 
 	for child in root:
 		if (child.get('id') != None):
