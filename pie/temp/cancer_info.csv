@@ -1,7 +1,12 @@
-ghe_cause,cases,rk_cases
-"Malignant neoplasms",812112,1
-"Cardiovascular diseases",727548,2
-"Digestive diseases",163574,3
-"Unintentional injuries",124292,4
-"Intentional injuries",102416,5
-"Other causes",411513,6
+cancer_label,cases,rk_cases
+"Breast",2264966,1
+"Lung",2208490,2
+"Colorectum",1930294,3
+"Prostate",1414259,4
+"Stomach",1088591,5
+"Liver",905400,6
+"Cervix uteri",604371,7
+"Oesophagus",604044,8
+"Thyroid",586182,9
+"Bladder",576023,10
+"All sites",7116386,11

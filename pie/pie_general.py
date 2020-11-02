@@ -3,11 +3,11 @@ from lxml import etree
 import subprocess
 import csv
 
-graph_title = 'Europe'
+graph_title = 'Both sexes'
 file_eps = './temp/temp.eps'
 file_svg = file_eps.replace('.eps', '.svg')
 
-minLabel = False
+minLabel = True
 
 print(file_eps)
 subprocess.call(['inkscape','--without-gui', '--export-plain-svg='+file_svg, file_eps], shell=True)

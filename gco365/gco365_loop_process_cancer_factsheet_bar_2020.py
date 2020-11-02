@@ -6,13 +6,18 @@ import subprocess
 
 
 regex = r"(.*)\.pdf"
+regex_cancer_name = r".*?-(.*)-fact.*\.pdf"
 
 for filebase in os.listdir('C:/Data/Globocan2020/factsheet/cancers'):
 # parameter 
 # name of the base file in the folder base
 	
 	print(filebase)
-	filename =  "bar-type-" +re.sub(regex, r"\1", filebase)  
+	cancer_name = re.sub(regex_cancer_name, r"\1", filebase)  
+	cancer_file = re.sub(r"\W", r"", cancer_name)  
+
+	filename =  "bar_both_incidence_mortality_region_" +cancer_file
+	print(filename)
 
 	#page of the graph
 	page = '2'
@@ -26,8 +31,8 @@ for filebase in os.listdir('C:/Data/Globocan2020/factsheet/cancers'):
 	heigth = 1200 
 
 
-	file_svg = 'C:/Data/Globocan2020/factsheet/cancers/bar_sex' + filename+ '.svg'
-	file_png = 'C:/Data/Globocan2020/factsheet/cancers/bar_sex'+ filename + '.png'
+	file_svg = 'C:/Data/Globocan2020/factsheet/cancers/bar_type/' + filename+ '.svg'
+	file_png = 'C:/Data/Globocan2020/factsheet/cancers/bar_type/'+ filename + '.png'
 
 	print('convert pdf to svg...')
 	# PDF factsheet to svg
@@ -55,9 +60,8 @@ for filebase in os.listdir('C:/Data/Globocan2020/factsheet/cancers'):
 
 	for child in root[1]:
 		if child.tag == 'path':
-			if ('rgb(11.799622%,25.898743%,45.098877%)' in child.get('style')):
+			if ('rgb(11.759949%,25.878906%,45.098877%)' in child.get('style')):
 				counter = counter+1
-				print(counter)
 				if (counter == graphic_number):
 					group = etree.Element('g')
 					group.append(child)
@@ -66,11 +70,11 @@ for filebase in os.listdir('C:/Data/Globocan2020/factsheet/cancers'):
 			# stop for last graph of the page
 			if len(child)==1:
 				if (child[0].tag == "path"):
-					if ('rgb(4.299927%,50.19989%,71.798706%)' in child[0].get('style')):
+					if ('rgb(4.309082%,50.19989%,71.759033%)' in child[0].get('style')):
 						break
 			# stop for last graph of the page
 			if (child.get('style') != None):
-				if ('rgb(4.299927%,50.19989%,71.798706%)' in child.get('style')):
+				if ('rgb(4.309082%,50.19989%,71.759033%)' in child.get('style')):
 					break
 
 			group.append(child)
@@ -86,9 +90,9 @@ for filebase in os.listdir('C:/Data/Globocan2020/factsheet/cancers'):
 	#position of graphic
 
 	if graphic_number == 3: 
-		group.set("transform", "matrix(2.9939928,0,0,2.9939928,-155.53439,-1660.8453)")
+		group.set("transform", "matrix(2.9939928,0,0,2.9939928,-269.43608,-2416.1767)")
 	elif graphic_number == 4: 
-		group.set("transform", "matrix(2.9939928,0,0,2.9939928,-1030.8913,-1660.8453)")
+		group.set("transform", "matrix(2.9939928,0,0,2.9939928,-1508.1655,-2416.1767)")
 
 	root.append(group)
 
@@ -98,6 +102,7 @@ for filebase in os.listdir('C:/Data/Globocan2020/factsheet/cancers'):
 
 	dis = etree.parse(open('./template/gco_template_square.svg'))
 	root_dis = dis.getroot()
+
 
 
 	# remove name space
@@ -114,7 +119,7 @@ for filebase in os.listdir('C:/Data/Globocan2020/factsheet/cancers'):
 				child.remove(elem)
 					
 
-	root_dis[3].set("transform", "matrix(2.6519685,0,0,2.6519685,1200.2178,760.91935)")
+	root_dis[3].set("transform", "matrix(3.9745509,0,0,3.9745509,1799.4387,1140.4029)")
 
 	root.insert(root.index(root[0])+1,root_dis[3])
 

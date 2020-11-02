@@ -4,30 +4,46 @@ import re
 from lxml import etree
 import subprocess
 
-
 regex = r"(.*)\.pdf"
+regex_cancer_name = r".*?-(.*)-fact.*\.pdf"
 
-for filebase in os.listdir('C:/Data/Globocan2020/factsheet/cancers'):
-# parameter 
-# name of the base file in the folder base
-	
+
+files = [f for f in os.listdir('C:/Data/Globocan2020/factsheet/cancers') if os.path.isfile(os.path.join('C:/Data/Globocan2020/factsheet/cancers',f))]
+# files = [f for f in os.listdir('C:/Data/Globocan2020/factsheet/cancers') if f == "1-Lip-oral-cavity-fact-sheet.pdf"]
+for filebase in files:
+
+	# print(filebase)
+
 	print(filebase)
-	filename =  "bar-type-" +re.sub(regex, r"\1", filebase)  
+	cancer_name = re.sub(regex_cancer_name, r"\1", filebase)  
+	cancer_file = re.sub(r"\W", r"", cancer_name)  
+	filename =  "pie_both_incidence_" +cancer_file
+	print(filename)
 
-	#page of the graph
-	page = '2'
+	title = cancer_name.replace('-', ' ') + ' cancer'
+	title = re.sub(r"(.*cancer) cancer", r"\1", title)
+	print(title)
 
-	# graphic number 3: bar chart by sex
-	# graphic number 4: bar chart by type
-	graphic_number = 4
+	# name of the final file
+	# filename = "031_gco365"
+
+	# #page of the graph
+	page = '1'
+
+	# # graphic number 1: pie chart new cases
+	# # graphic number 2: pie chart deaths
+	graphic_number = 1
 
 	# height of the graph can be edit
 	# format is 16:9 (1200*)
 	heigth = 1200 
 
 
-	file_svg = 'C:/Data/Globocan2020/factsheet/cancers/bar_sex' + filename+ '.svg'
-	file_png = 'C:/Data/Globocan2020/factsheet/cancers/bar_sex'+ filename + '.png'
+	file_svg = 'C:/Data/Globocan2020/factsheet/cancers/pie-cases/' + filename+ '.svg'
+	file_png = 'C:/Data/Globocan2020/factsheet/cancers/pie-cases/'+ filename + '.png'
+
+	print(file_svg)
+	print('C:/Data/Globocan2020/factsheet/cancers/'+ filebase)
 
 	print('convert pdf to svg...')
 	# PDF factsheet to svg
@@ -48,34 +64,33 @@ for filebase in os.listdir('C:/Data/Globocan2020/factsheet/cancers'):
 
 	# regroup element
 
-	bool_group = False 
 	counter = 0
 
 	group = etree.Element('g')
 
+
 	for child in root[1]:
+
+
 		if child.tag == 'path':
-			if ('rgb(11.799622%,25.898743%,45.098877%)' in child.get('style')):
+
+			if ('rgb(11.759949%,25.878906%,45.098877%)' in child.get('style')):
 				counter = counter+1
-				print(counter)
 				if (counter == graphic_number):
-					group = etree.Element('g')
 					group.append(child)
 
 		if (counter == graphic_number):
 			# stop for last graph of the page
 			if len(child)==1:
 				if (child[0].tag == "path"):
-					if ('rgb(4.299927%,50.19989%,71.798706%)' in child[0].get('style')):
+					if ('rgb(4.309082%,50.19989%,71.759033%)' in child[0].get('style')):
 						break
-			# stop for last graph of the page
-			if (child.get('style') != None):
-				if ('rgb(4.299927%,50.19989%,71.798706%)' in child.get('style')):
-					break
 
 			group.append(child)
 		if (counter != graphic_number):
-			root[1].remove(child)
+			if (child.getparent() == root[1]):
+				root[1].remove(child)
+
 
 
 	for child in root:
@@ -85,10 +100,10 @@ for filebase in os.listdir('C:/Data/Globocan2020/factsheet/cancers'):
 
 	#position of graphic
 
-	if graphic_number == 3: 
-		group.set("transform", "matrix(2.9939928,0,0,2.9939928,-155.53439,-1660.8453)")
-	elif graphic_number == 4: 
-		group.set("transform", "matrix(2.9939928,0,0,2.9939928,-1030.8913,-1660.8453)")
+	if graphic_number == 1: 
+		group.set("transform", "matrix(3.1738315,0,0,3.1738315,-311.8713,-254.95541)")
+	elif graphic_number == 2: 
+		group.set("transform", "matrix(3.1738315,0,0,3.1738315,-1625.0069,-254.95541)")
 
 	root.append(group)
 
@@ -109,15 +124,12 @@ for filebase in os.listdir('C:/Data/Globocan2020/factsheet/cancers'):
 	for child in root_dis[3]:
 		for elem in child:
 			if elem.tag == 'text':
-				child.remove(elem)
-			if elem.tag == 'path':
-				child.remove(elem)
-					
+				if elem[0].text == 'title':
+					elem[0].text = title
 
-	root_dis[3].set("transform", "matrix(2.6519685,0,0,2.6519685,1200.2178,760.91935)")
+	root_dis[3].set("transform", "matrix(3.9745509,0,0,3.9745509,1799.4387,1140.4029)")
 
 	root.insert(root.index(root[0])+1,root_dis[3])
-
 
 	base.write(file_svg, pretty_print=False)
 	# subprocess.Popen(['inkscape', '-f=' + file_svg])

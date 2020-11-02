@@ -7,12 +7,12 @@ from lxml import etree
 import subprocess
 
 
-regex = r"map_(.+)_(.+)_(.+)_(.+)_(.+)"
+regex = r"map_(.+)_(.+)_(.+)_(.+)"
 cancer_name = pd.read_csv('./template/map_R_cancer_name.csv')
 
 regex_svg = r"(.*)\.svg"
 
-folder_base = 'C:/Projects/globocan2018_graph/map_by_site/asr_abs'
+folder_base = 'C:/Projects/globocan2018_graph/map_by_site/prevalence_abs'
 
 for file in os.listdir(folder_base):
 # parameter 
@@ -34,21 +34,26 @@ for file in os.listdir(folder_base):
 			title_sex = title_sex+'s'
 
 		title_type = re.sub(regex, r"\2", filebase)
-		title_key = re.sub(regex, r"\3", filebase)
+		# title_key = re.sub(regex, r"\3", filebase)
 
-		if title_key == 'asr':
-			title_base = 'Estimated age-standardized ' + title_type + ' rates (World) in 2018'
-		elif title_key == 'cumrisk':
-			title_base = 'Estimated cumulative risk of ' + title_type + ' in 2018'
+		# if title_key == 'asr':
+		# 	title_base = 'Estimated age-standardized ' + title_type + ' rates (World) in 2018'
+		# elif title_key == 'cumrisk':
+		# 	title_base = 'Estimated cumulative risk of ' + title_type + ' in 2018'
+		
 
+		title_base = '5-years prevalence, proportion per 100000 in 2018'
 
-		title_cancer = cancer_name[cancer_name["file_cancer"] == re.sub(regex, r"\5", filebase)]['cancer_name'].values[0]
+		print(filebase)
+		print('\n' + filebase)
+
+		title_cancer = cancer_name[cancer_name["file_cancer"] == re.sub(regex, r"\4", filebase)]['cancer_name'].values[0]
 
 		
 		title = title_base + ', ' + title_cancer + ', ' + title_sex
-		print('\n' + title +'\n' )
-		file_svg = './result/map/asr_absolute/' + 'temp'+ '.svg'
-		file_png = './result/map/asr_absolute/'+ filename + '.png'
+		print(title +'\n' )
+		file_svg = './result/map/prevalence_absolute/' + 'temp'+ '.svg'
+		file_png = './result/map/prevalence_absolute/'+ filename + '.png'
 
 
 
