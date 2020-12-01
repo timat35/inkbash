@@ -5,7 +5,7 @@ import subprocess
 import csv
 import re
 
-graph_title = "Europe, females"
+graph_title = "World, females"
 file_tile = re.sub(r"\W+", r"_", graph_title)
 
 
