@@ -61,6 +61,18 @@ if "fill:rgb(0" in temp:
 
     legend_title.set("transform", "matrix(1.231145,0,0,1.231145,-31.5048,-420.25869)")
 
+# move legend title 2nd line if exist
+legend_title = map[legend_index-2]
+temp = legend_title.get("style")
+
+if "fill:rgb(0" in temp:
+    shift = float(legend_title[0].get('x')) - 134.05665
+
+    for child in legend_title:
+        temp = float(child.get('x'))-shift
+        child.set('x', str(temp))
+
+    legend_title.set("transform", "matrix(1.231145,0,0,1.231145,-31.5048,-420.25869)")
 
 
 dis = etree.parse(open(os.path.join(dir_folder, 'disclaimer.svg')))

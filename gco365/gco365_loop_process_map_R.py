@@ -7,16 +7,28 @@ from lxml import etree
 import subprocess
 
 
-regex = r"map_(.+)_(.+)_(.+)_(.+)"
+regex = r"map_(.+?)_(.+?)_(.+?)_(.+)"
 cancer_name = pd.read_csv('./template/map_R_cancer_name.csv')
+
+regex_cancer = r".*_(.*)"
 
 regex_svg = r"(.*)\.svg"
 
-folder_base = 'C:/Projects/globocan2018_graph/map_by_site/prevalence_abs'
+
+folder_base = 'C:/Projects/globocan2020_graph/map/prevalence/svg'
+folder_tweet = 'world_prevalence'
+
+
+
+
 
 for file in os.listdir(folder_base):
 # parameter 
 # name of the base file in the folder base
+
+	# if not re.search(r"absolute",file):
+	# 	continue
+
 	matches = re.search(regex_svg,file)
 	if matches:
 		filebase = re.sub(regex_svg, r"\1", file)
@@ -33,29 +45,23 @@ for file in os.listdir(folder_base):
 		else:
 			title_sex = title_sex+'s'
 
-		title_type = re.sub(regex, r"\2", filebase)
-		# title_key = re.sub(regex, r"\3", filebase)
+		# title_type = re.sub(regex, r"\2", filebase)
+		title_type = "5-year prevalence"
 
-		# if title_key == 'asr':
-		# 	title_base = 'Estimated age-standardized ' + title_type + ' rates (World) in 2018'
-		# elif title_key == 'cumrisk':
-		# 	title_base = 'Estimated cumulative risk of ' + title_type + ' in 2018'
-		
 
-		title_base = '5-years prevalence, proportion per 100000 in 2018'
 
 		print(filebase)
-		print('\n' + filebase)
 
-		title_cancer = cancer_name[cancer_name["file_cancer"] == re.sub(regex, r"\4", filebase)]['cancer_name'].values[0]
+		title_cancer = cancer_name[cancer_name["file_cancer"] == re.sub(regex_cancer, r"\1", filebase)]['cancer_name'].values[0].capitalize()
 
-		
-		title = title_base + ', ' + title_cancer + ', ' + title_sex
+		if not re.search(r"cancer", title_cancer):
+			title_cancer = title_cancer + ' cancer'
+			
+		title = title_cancer + ', ' + title_type + ', ' + title_sex
+
 		print(title +'\n' )
-		file_svg = './result/map/prevalence_absolute/' + 'temp'+ '.svg'
-		file_png = './result/map/prevalence_absolute/'+ filename + '.png'
-
-
+		file_svg = './temp/temp_result.svg'
+		file_png = 'C:/Projects/tweetO/img_sort/map/'+folder_tweet+'/'+ filename + '.png'
 
 
 		base = etree.parse(open(folder_base+'/'+ filebase +'.svg'))
@@ -124,4 +130,4 @@ for file in os.listdir(folder_base):
 
 		print(filename + ' is processed')
 
-	
+	# 
