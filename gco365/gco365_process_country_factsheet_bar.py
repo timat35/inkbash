@@ -15,28 +15,27 @@ regex_title = r".*?(\d+)-(.+)-fact-sheets.pdf"
 
 title = ""
 
-
 #page of the graph
-page = '1'
+page = '2'
 
-# graphic number 2: pie chart new cases both sexes
-# graphic number 3: pie chart new cases males
-# graphic number 4: pie chart new cases females
+# graphic number 2: bar chart by sex
+# graphic number 3: bar chart by type
 graphic_number = 2
 
 # height of the graph can be edit
-# format is 16:9 (1200*)
+# format is 16:9 (1200*) 
 heigth = 675 
 
 if graphic_number == 2 :
-	graph_type = 'pie_top_incidence_both'
+	graph_type = 'bar_top_male_female'
 elif graphic_number == 3 :
-	graph_type = 'pie_top_incidence_male'
-elif graphic_number == 4 :
-	graph_type = 'pie_top_incidence_female'
+	graph_type = 'bar_male_incidence_mortality'
+
+
 
 # parameter 
 # name of the base file in the folder base
+
 
 print(filebase)
 country_name = re.sub(regex_title, r"\2", filebase)  
@@ -46,22 +45,15 @@ print(filename)
 
 country_code =  re.sub(regex_title, r"\1", filebase)
 
+print(country_code)
 if title == "":
 	title = country_info[country_info["COUNTRY"] == int(country_code)]['LABEL'].values[0]
 	print(title)
 
-
-
-
-# height of the graph can be edit
-# format is 16:9 (1200*)
-heigth = 1200 
-
-
 file_svg = './result/'+ filename + '.svg'
 file_png = './result/'+ filename + '.png'
 
-print('convert pdf to svg...')
+
 # PDF factsheet to svg
 subprocess.call([os.path.dirname(__file__) + '/pdf2svg/pdf2svg.exe', 
 			filebase , 
@@ -69,7 +61,6 @@ subprocess.call([os.path.dirname(__file__) + '/pdf2svg/pdf2svg.exe',
 			page
 			], shell=True)
 print('convertion done.')
-
 
 base = etree.parse(open(file_svg))
 root = base.getroot()
@@ -81,21 +72,18 @@ etree.cleanup_namespaces(root)
 
 # regroup element
 
+bool_group = False 
 counter = 0
 
 group = etree.Element('g')
-
-
-
-# drop last element of the page
-
 
 for child in root[1]:
 	if child.tag == 'path':
 		if ('rgb(11.799622%,25.898743%,45.098877%)' in child.get('style')) | ('rgb(11.759949%,25.878906%,45.098877%)' in child.get('style')):
 			counter = counter+1
-			continue;
-
+			if (counter == graphic_number):
+				group = etree.Element('g')
+				group.append(child)
 
 	if (counter == graphic_number):
 		# stop for last graph of the page
@@ -110,8 +98,7 @@ for child in root[1]:
 
 		group.append(child)
 	if (counter != graphic_number):
-		if (child.getparent() == root[1]):
-			root[1].remove(child)
+		root[1].remove(child)
 
 
 
@@ -124,22 +111,21 @@ for child in root:
 
 #position of graphic
 
+
+
+
 if graphic_number == 2: 
-	group.set("transform", "matrix(3.7498829,0,0,3.7498829,-716.01594,-376.87173)")
-elif graphic_number == 3:
-	group.set("transform", "matrix(3.7498829,0,0,3.7498829,-716.01594,-1291.4293)")
-elif graphic_number == 4:
-	if (len(group) > 0):
-		group.remove(group[len(group)-1])
-	group.set("transform", "matrix(3.7498829,0,0,3.7498829,-716.01594,-2205.9869)")
+	group.set("transform", "matrix(2.4939928,0,0,2.4939928,-665.73439,-1324.7623)")
+elif graphic_number == 3: 
+	group.set("transform", "matrix(2.4939928,0,0,2.4939928,-665.73439,-1961.8593)")
 
 root.append(group)
 
 root.set("width", "1200")
-root.set("height", "1200")
+root.set("height", "675")
 
 
-dis = etree.parse(open('./template/gco_template_square_subtitle.svg'))
+dis = etree.parse(open('./template/gco_template_landscape_bar.svg'))
 root_dis = dis.getroot()
 
 
@@ -155,14 +141,12 @@ for child in root_dis[3]:
 			if elem[0].text == 'title':
 				elem[0].text = title
 
-
-
-root_dis[3].set("transform", "matrix(3.9748031,0,0,3.9748031,1799.5046,1140.4753)")
+root_dis[3].set("transform", "matrix(7.3819685,0,0,7.3819685,2942,1075)")
 
 root.insert(root.index(root[0])+1,root_dis[3])
 
 base.write(file_svg, pretty_print=False)
-# subprocess.Popen(['inkscape', '-f=' + file_svg])
+#subprocess.Popen(['inkscape', '-f=' + file_svg])
 
 # export to png
 subprocess.call(['inkscape', 

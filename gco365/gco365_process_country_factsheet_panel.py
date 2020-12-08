@@ -15,28 +15,15 @@ regex_title = r".*?(\d+)-(.+)-fact-sheets.pdf"
 
 title = ""
 
-
-#page of the graph
 page = '1'
+heigth = 1200 
 
-# graphic number 2: pie chart new cases both sexes
-# graphic number 3: pie chart new cases males
-# graphic number 4: pie chart new cases females
-graphic_number = 2
+graph_type = 'multi_panel'
 
-# height of the graph can be edit
-# format is 16:9 (1200*)
-heigth = 675 
-
-if graphic_number == 2 :
-	graph_type = 'pie_top_incidence_both'
-elif graphic_number == 3 :
-	graph_type = 'pie_top_incidence_male'
-elif graphic_number == 4 :
-	graph_type = 'pie_top_incidence_female'
 
 # parameter 
 # name of the base file in the folder base
+	
 
 print(filebase)
 country_name = re.sub(regex_title, r"\2", filebase)  
@@ -52,11 +39,7 @@ if title == "":
 
 
 
-
-# height of the graph can be edit
-# format is 16:9 (1200*)
-heigth = 1200 
-
+#page of the graph
 
 file_svg = './result/'+ filename + '.svg'
 file_png = './result/'+ filename + '.png'
@@ -87,51 +70,78 @@ group = etree.Element('g')
 
 
 
-# drop last element of the page
+# regroup element
+
+counter = 0
+bool_add = False
+bool_mark = False
+group = etree.Element('g')
 
 
 for child in root[1]:
+
+
 	if child.tag == 'path':
 		if ('rgb(11.799622%,25.898743%,45.098877%)' in child.get('style')) | ('rgb(11.759949%,25.878906%,45.098877%)' in child.get('style')):
 			counter = counter+1
-			continue;
-
-
-	if (counter == graphic_number):
-		# stop for last graph of the page
-		if len(child)==1:
-			if (child[0].tag == "path"):
-				if ('rgb(4.299927%,50.19989%,71.798706%)' in child[0].get('style')) | ('rgb(4.309082%,50.19989%,71.759033%)' in child[0].get('style')):
-					break
-		# stop for last graph of the page
-		if (child.get('style') != None):
+			if (counter == 2):
+				bool_add = True
+				group.append(child)
+	
+	if child.tag == 'g':
+		if child[0].tag == 'use':
 			if ('rgb(4.299927%,50.19989%,71.798706%)' in child.get('style')) | ('rgb(4.309082%,50.19989%,71.759033%)' in child.get('style')):
-				break
+				bool_mark = True
 
+	if child.tag == 'g':
+		if child[0].tag == 'use':
+			if ('rgb(100%,100%,100%)' in child.get('style')):
+				if (bool_mark):
+					break
+
+
+
+	if bool_add:
 		group.append(child)
-	if (counter != graphic_number):
-		if (child.getparent() == root[1]):
-			root[1].remove(child)
+	else:
+		root[1].remove(child)
 
 
+# remove some element
+counter_line = 0
+counter = 0
+
+for child in group:
+	if child.tag == 'path':
+		if ('rgb(79.998779%,79.998779%,79.998779%)' in child.get('style')):
+			counter_line = counter_line+1
+			if (counter_line == 4):
+				group.remove(child)
+			if (counter_line > 7):
+				group.remove(child)
+
+		if ('rgb(11.799622%,25.898743%,45.098877%)' in child.get('style')) | ('rgb(11.759949%,25.878906%,45.098877%)' in child.get('style')):
+			counter = counter+1
+			if (counter == 6):
+				group.remove(child)
 
 for child in root:
 	if (child.get('id') != None):
 		if 'surface' in child.get('id'):
 			root.remove(child)
 
+nb_rect = 0
+for child in group:
+	if child.tag == 'path':
+		if ('rgb(11.799622%,25.898743%,45.098877%)' in child.get('style')) | ('rgb(11.759949%,25.878906%,45.098877%)' in child.get('style')):
+			nb_rect = nb_rect+1
+			if nb_rect == 6:
+				group.remove(child)
+
 
 
 #position of graphic
-
-if graphic_number == 2: 
-	group.set("transform", "matrix(3.7498829,0,0,3.7498829,-716.01594,-376.87173)")
-elif graphic_number == 3:
-	group.set("transform", "matrix(3.7498829,0,0,3.7498829,-716.01594,-1291.4293)")
-elif graphic_number == 4:
-	if (len(group) > 0):
-		group.remove(group[len(group)-1])
-	group.set("transform", "matrix(3.7498829,0,0,3.7498829,-716.01594,-2205.9869)")
+group.set("transform", "matrix(1.4475401,0,0,1.4475401,-199.62875,-122.28937)")
 
 root.append(group)
 
@@ -139,7 +149,7 @@ root.set("width", "1200")
 root.set("height", "1200")
 
 
-dis = etree.parse(open('./template/gco_template_square_subtitle.svg'))
+dis = etree.parse(open('./template/gco_template_square_panel.svg'))
 root_dis = dis.getroot()
 
 
@@ -173,3 +183,4 @@ subprocess.call(['inkscape',
 
 
 print(filename + ' is processed')
+			
