@@ -97,7 +97,7 @@ g_dis[0][0].text = "Data source: " + sys.argv[2]
 g_dis[0][1].text = "Map production: " + sys.argv[3]
 g_dis[0].remove(g_dis[0][3])
 
-g_dis[1][1][0].text = "© WHO 2020. All rights reserved"
+g_dis[1][1][0].text = "© WHO 2021. All rights reserved"
 
 #resize graph if title present
 if len(sys.argv) > 4:

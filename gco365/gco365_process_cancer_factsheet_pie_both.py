@@ -5,7 +5,7 @@ from lxml import etree
 import subprocess
 
 #file:
-filebase = "C:/Projects/inkbash/gco365/base/39-All-cancers-fact-sheet.pdf"
+filebase = "C:/Data/Globocan2020/factsheet/cancers/39-All-cancers-fact-sheet.pdf"
 
 regex = r"(.*)\.pdf"
 regex_cancer_name = r".*?-(.*)-fact.*\.pdf"
