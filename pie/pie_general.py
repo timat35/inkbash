@@ -3,14 +3,14 @@ from lxml import etree
 import subprocess
 import csv
 
-graph_title = ''
+graph_title = 'Western Europe'
 file_eps = './temp/temp.eps'
 file_svg = file_eps.replace('.eps', '.svg')
 
 minLabel = False
 
 print(file_eps)
-subprocess.call(['inkscape','--without-gui', '--export-plain-svg='+file_svg, file_eps], shell=True)
+subprocess.call(['inkscape', '--export-filename='+file_svg, file_eps], shell=True)
 print(file_svg)
 
 
@@ -89,7 +89,7 @@ for child in root[4]:
 
 
 base.write(file_final, pretty_print=False)
-subprocess.Popen(['inkscape', '-f=' + file_final])
+subprocess.Popen(['inkscape',  file_final])
 print("look on inkscape")
 
 
