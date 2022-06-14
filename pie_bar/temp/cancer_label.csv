@@ -1,16 +1,16 @@
 cancer_label,pos
-"Breast",-204.1644
-"Colorectum",-130.2656
-"Lung",-91.59269
-"Cervix uteri",-59.09959
-"Thyroid",-34.21399
-"Breast",-223.0588
-"Lung",-157.8736
-"Colorectum",-106.0768
-"Cervix uteri",-67.67731
-"Stomach",-37.02113
-"Breast",-195.3406
-"Colorectum",-113.8983
-"Thyroid",-82.38715
-"Cervix uteri",-58.1185
-"Corpus uteri",-34.89484
+"Breast",-218.3229
+"Lung",-151.565
+"Colorectum",-103.0151
+"Prostate",-67.05942
+"Liver",-37.89233
+"Lung",-218.8355
+"Breast",-157.294
+"Liver",-112.8794
+"Colorectum",-73.01927
+"Stomach",-39.20424
+"Breast",-209.2099
+"Colorectum",-139.129
+"Prostate",-98.25729
+"Bladder",-65.12378
+"Thyroid",-37.39139

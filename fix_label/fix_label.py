@@ -7,7 +7,9 @@ file_svg = file_eps.replace('.eps', '.svg')
 file_final = './graph.svg'
 
 
-subprocess.call(['inkscape', '--without-gui', '--export-plain-svg='+file_svg, file_eps], shell=True)
+
+
+subprocess.call(['inkscape', '--export-filename='+file_svg, file_eps], shell=True)
 print("file convert to svg")
 
 base = etree.parse(open(file_svg, encoding='utf-8-sig'))
@@ -21,7 +23,7 @@ for elem in root.iter():
         elem.set('y', temp_y)
 
 
-base.write('./graph.svg', pretty_print=False)
+base.write(file_final, pretty_print=False)
 
-subprocess.Popen(['inkscape', '-f=' + file_final])
+subprocess.Popen(['inkscape',  file_final])
 print("look on inkscape")

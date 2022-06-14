@@ -8,11 +8,13 @@ import re
 graph_title = "World, females"
 file_tile = re.sub(r"\W+", r"_", graph_title)
 
+bool_no_prev = True
+
 
 for i in range(0,3):
-    subprocess.call(['inkscape','--without-gui', '--export-plain-svg=./temp/bar'+str(i)+'.svg', './temp/bar'+str(i)+'.eps'], shell=True)
+    subprocess.call(['inkscape', '--export-filename=./temp/bar'+str(i)+'.svg', './temp/bar'+str(i)+'.eps'], shell=True)
     print('bar'+str(i) + " convert")
-    subprocess.call(['inkscape','--without-gui', '--export-plain-svg=./temp/pie'+str(i)+'.svg', './temp/pie'+str(i)+'.eps'], shell=True)
+    subprocess.call(['inkscape', '--export-filename=./temp/pie'+str(i)+'.svg', './temp/pie'+str(i)+'.eps'], shell=True)
     print('pie'+str(i) + " convert")
 
 
@@ -57,9 +59,16 @@ pie_file = ["./temp/pie0.svg", "./temp/pie1.svg", "./temp/pie2.svg"]
 bar_file = ["./temp/bar0.svg", "./temp/bar1.svg", "./temp/bar2.svg"]
 bar_scale = ["-2.5593047", "356.80114", "698.53954"]
 
-pie_size[0] = math.sqrt( pop_size[0]/pop_size[4]) * 200
-pie_size[1] = math.sqrt( pop_size[2]/pop_size[4]) * 200
-pie_size[2] = 200
+if (bool_no_prev):
+    pie_size[0] = 200
+    pie_size[1] = math.sqrt( pop_size[2]/pop_size[0]) * 200
+    pie_size[2] = 200
+
+else:
+    pie_size[0] = math.sqrt( pop_size[0]/pop_size[4]) * 200
+    pie_size[1] = math.sqrt( pop_size[2]/pop_size[4]) * 200
+    pie_size[2] = 200
+
 
 
 percent_size= [0,0,0,0,0,0]
@@ -144,7 +153,7 @@ for child in root[3]:
 
 
 base.write('./done/multi_top5_' + file_tile + '.svg', pretty_print=False)
-subprocess.Popen(['inkscape', '-f=' + './done/multi_top5_' + file_tile + '.svg'])
+subprocess.Popen(['inkscape',  './done/multi_top5_' + file_tile + '.svg'])
 print("look on inkscape")
 
 
