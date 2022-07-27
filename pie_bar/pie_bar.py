@@ -5,7 +5,7 @@ import subprocess
 import csv
 import re
 
-graph_title = "World, females"
+graph_title = "Western Asia"
 file_tile = re.sub(r"\W+", r"_", graph_title)
 
 bool_no_prev = True
@@ -37,6 +37,7 @@ for x in cancer_list:
         lab_cancer[i-1] = x[0]
         lab_pos[i-1] = x[1]
     i = i +1
+
 
 
 
@@ -120,7 +121,7 @@ for i in range(0,3):
 
 
 
-
+print(lab_pos)
 
 for child in root[3]:
     if len(child.getchildren()) == 1:
@@ -129,13 +130,15 @@ for child in root[3]:
                 child[0].text = str(percent_size[i])+"%"
             if child[0].text == str(i+1):
                 child[0].text = lab_cancer[i]
-                child.set('y', lab_pos[i])
+                child[0].set('y', lab_pos[i])
             if child[0].text == str(i+1+5):
                 child[0].text = lab_cancer[i+5]
-                child.set('y', lab_pos[i+5])
+                child[0].set('y', lab_pos[i+5])
             if child[0].text == str(i+1+10):
                 child[0].text = lab_cancer[i+10]
-                child.set('y', lab_pos[i+10])
+                child[0].set('y', lab_pos[i+10])
+            # print(i)
+            # print(child[0].get('y'))
 
 
         if child[0].text == "Title":
