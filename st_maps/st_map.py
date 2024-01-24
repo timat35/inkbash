@@ -75,7 +75,7 @@ if "fill:rgb(0" in temp:
     legend_title.set("transform", "matrix(1.231145,0,0,1.231145,-31.5048,-420.25869)")
 
 
-dis = etree.parse(open(os.path.join(dir_folder, 'disclaimer.svg')))
+dis = etree.parse(open(os.path.join(dir_folder, 'disclaimer-update.svg')))
 root_dis = dis.getroot()
 
 #add title
@@ -91,13 +91,13 @@ if len(sys.argv) > 4:
 
 #add disclaimer
 g_dis = root_dis[3][0]
-g_dis.set("transform", "matrix(0.9375,0,0,0.9375,-15.085697,269.42903)")
+g_dis.set("transform", "matrix(2.7827358,0,0,2.7827358,-14.672094,-516.16189)")
 
 g_dis[0][0].text = "Data source: " + sys.argv[2]
 g_dis[0][1].text = "Map production: " + sys.argv[3]
 g_dis[0].remove(g_dis[0][3])
 
-g_dis[1][1][0].text = "© WHO 2021. All rights reserved"
+g_dis[1][1][0].text = "© IARC/WHO 2024. All rights reserved"
 
 #resize graph if title present
 if len(sys.argv) > 4:
