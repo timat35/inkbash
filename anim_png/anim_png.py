@@ -1,7 +1,7 @@
 from lxml import etree
 import subprocess
 
-dpi = 200
+dpi = 300
 
 
 base = etree.parse('./base_svg.svg')
@@ -27,7 +27,7 @@ for i in range(0, (nb_png)):
 
     map_png.append(map[0])
     output.write('./anim_png.svg', pretty_print=False)
-    subprocess.call(['inkscape', '--without-gui', '-d' + str(dpi), '--export-png=./anim_png/anim_png'+ str(i) + '.png', './anim_png.svg'], shell=True)
+    subprocess.call(['inkscape', '--export-dpi=' + str(dpi),  '--export-filename=./anim_png/anim_png'+ str(i) + '.png', './anim_png.svg'], shell=True)
     map_png.remove(map_png[0])
 
 

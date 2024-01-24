@@ -5,7 +5,7 @@ import subprocess
 import csv
 import re
 
-graph_title = "Western Asia"
+graph_title = "Low"
 file_tile = re.sub(r"\W+", r"_", graph_title)
 
 bool_no_prev = True

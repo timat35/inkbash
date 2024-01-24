@@ -3,7 +3,7 @@ from lxml import etree
 import subprocess
 import csv
 
-graph_title = 'Western Europe'
+graph_title = 'World'
 file_eps = './temp/temp.eps'
 file_svg = file_eps.replace('.eps', '.svg')
 

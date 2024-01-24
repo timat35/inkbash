@@ -1,7 +1,12 @@
-ghe_cause,cases,rk_cases
-"Malignant neoplasms",184850,1
-"Cardiovascular diseases",77973,2
-"Digestive diseases",28119,3
-"Respiratory diseases",21003,4
-"Intentional injuries",16775,5
-"Other causes",82194,6
+cancer_label,cases,rk_cases
+"Trachea, bronchus and lung",1817172,1
+"Colorectum",903859,2
+"Liver and intrahepatic bile ducts",757948,3
+"Breast",669427,4
+"Stomach",659853,5
+"Pancreas",467005,6
+"Oesophagus",445129,7
+"Prostate",396792,8
+"Cervix uteri",348189,9
+"Leukaemia",305033,10
+"All cancers",2966372,11
