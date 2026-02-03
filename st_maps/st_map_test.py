@@ -2,44 +2,36 @@ import sys
 import os
 from lxml import etree
 
-base = etree.parse(open("C:/project/LMIC_trend/_figs/temp.svg"))
+base = etree.parse(open("C:/project/GICR/map_temp.svg")) ## update for general
+
+base = etree.parse(open(sys.argv[1]))
 root = base.getroot()
 legend_nb= 0
 
 dir_folder = os.path.dirname(__file__)
 
-
 root.set("width", "565.92426")
 root.set("height", "293.53516")
 
 root.remove(root[1])
-
 root.set("viewBox", "0 0 424.44319 220.15137")
 
-
-
-# for node in map:
-#     print('temp')
-#     print(node.attrib)
-
 map = etree.Element("g")
-
 # group element together
 for child in root[1:]:
     map.append(child)
-
 root.append(map)
+
 map.set("transform", "matrix(0.15625,0,0,0.15625,-13.296351,-136.34035)")
     
-
 #get the legend index start and the legend number
 for child in map:
     temp = child.get("stroke-linejoin")
-
+    print(temp)
     if temp == 'miter':
+
         legend_index = map.index(child)
         legend_nb = legend_nb + 1
-
 
 legend_index = legend_index-legend_nb+1
 
@@ -95,39 +87,40 @@ dis = etree.parse(open(os.path.join(dir_folder, 'disclaimer-update.svg')))
 root_dis = dis.getroot()
 
 #add title
-if True:
+if len(sys.argv) > 4:
     title = root_dis[3][1]
     title.set('x', '212.26086')
     title.set('y', '16.089844')
     temp_style = title[0].get("style")
     temp_title = temp_style.replace('font-size:4.23333px', 'font-size:12.00000006px')
     title[0].set('style', temp_title)
-    title[0].text = "title test"
+    title[0].text = sys.argv[4]
     root.append(title)
 
 #add disclaimer
 g_dis = root_dis[3][0]
 g_dis.set("transform", "matrix(2.7827358,0,0,2.7827358,-14.672094,-516.16189)")
 
-g_dis[0][0].text = "Data source: " + "Globocan 2022"
-g_dis[0][1].text = "Map production: " +"CSU"
+g_dis[0][0].text = "Data source: " + sys.argv[2]
+g_dis[0][1].text = "Map production: " + sys.argv[3]
 g_dis[0].remove(g_dis[0][3])
 
-g_dis[1][1][0].text = "© IARC/WHO 2024. All rights reserved"
+g_dis[1][1][0].text = "© IARC/WHO 2025. All rights reserved"
 
 #resize graph if title present
-if True:
+if len(sys.argv) > 4:
     map.set("transform", "matrix(0.15625,0,0,0.15625,-13.296351,-112.25051)")
     g_dis.set("transform", "matrix(2.7827358,0,0,2.7827358,-14.672094,-489.16189)")
     root.set("height", "325.65494")
     root.set("viewBox", "0 0 424.44319 244.24121")
 
 
+
 root.append(g_dis)
-# map.remove(map[0])
+map.remove(map[0])
 
 
-base.write("map_test_result.svg", pretty_print=False)
+base.write(sys.argv[1], pretty_print=False)
 
 
 
