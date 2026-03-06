@@ -117,7 +117,7 @@ if len(sys.argv) > 4:
 
 
 root.append(g_dis)
-map.remove(map[0])
+# map.remove(map[0])
 
 
 base.write(sys.argv[1], pretty_print=False)
