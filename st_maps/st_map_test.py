@@ -4,7 +4,7 @@ from lxml import etree
 
 base = etree.parse(open("C:/project/GICR/map_temp.svg")) ## update for general
 
-base = etree.parse(open(sys.argv[1]))
+# base = etree.parse(open(sys.argv[1]))
 root = base.getroot()
 legend_nb= 0
 

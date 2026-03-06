@@ -3,10 +3,12 @@ import os
 from lxml import etree
 
 base = etree.parse(open(sys.argv[1]))
+# base = etree.parse(r"C:\project\globocan2024_paper\_figs\temp.svg")
 root = base.getroot()
 legend_nb= 0
 
 dir_folder = os.path.dirname(__file__)
+# dir_folder = os.path.dirname(__name__) (for testting)
 
 root.set("width", "565.92426")
 root.set("height", "293.53516")
@@ -112,7 +114,7 @@ if len(sys.argv) > 4:
 
 
 root.append(g_dis)
-map.remove(map[0])
+# map.remove(map[0])
 
 
 base.write(sys.argv[1], pretty_print=False)
